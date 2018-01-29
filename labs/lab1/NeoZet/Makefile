@@ -1,9 +1,9 @@
 all: lab1
-lab1: fp.o
-	gcc fp.o -o lab1
+lab1: la.o
+	gcc la.o -o lab1
 
-fp.o: fp.c
-	gcc -c fp.c
+la.o: la.c
+	gcc -c la.c
 
 clean:
 	rm -rf *.o lab1
