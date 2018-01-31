@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-float btofloat(char *bin)
+void btofloat(char *bin)
 	{
 		int a;
 		int res=0;
@@ -14,7 +14,7 @@ float btofloat(char *bin)
 		printf ("%f\n", resf);
 	}
 
-float floattob(float dec)
+void floattob(float dec)
 	{
 		int a, b;
 		char *bin;
