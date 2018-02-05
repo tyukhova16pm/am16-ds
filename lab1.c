@@ -19,7 +19,8 @@ float bintodec(char *s)
             return EOF;
         n += 01 << (strlen(s)-1);
     }
-    return n;    
+    float *val =  (float*)&n;
+    return *val;    
 }
 
 
@@ -38,12 +39,12 @@ void dectobin (float n)
  	}
 
 
-int main(int argc, char* argv[])
+int main()
 {
-    float bintodec(char *);
+    
      
     char *bin = "11000001000101100110011001100110";
-    dectobin(-1055496576.00);
+    dectobin(13.45);
         
     printf("%f\n", bintodec(bin));
     
