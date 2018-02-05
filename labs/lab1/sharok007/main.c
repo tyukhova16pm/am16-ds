@@ -59,8 +59,8 @@ int main()
         break;
     case 2:
         printf("Введите число в двоичной сс:");
-        char mass[32];
-        scanf("%s",mass);
+        char mass[33];
+        scanf("%32s",mass);
         BinInDec(mass);
     default:
         printf("Такого пункта нет");
