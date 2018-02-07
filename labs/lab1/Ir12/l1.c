@@ -15,17 +15,18 @@ void bin()	//Функция преобразования десятичного 
 }
 float des()	//Функция преобразования двоичного числа в десятичное
 {
-	char bin[32];
+	char bin[33];
 	int des=0;
 	printf("Введите двоичное число:\n");
-	scanf("%s",bin);
+	scanf("%32s",bin);
 	for (int i = 0 ; i < 32; ++i )
 	{
 		des <<= 1;
 		des |= (bin[i] - '0');
+	}
 		float y=*(float*)&des;
 		printf("%f", y);
-	}
+		printf("\n");
 }
 int main()
 {
