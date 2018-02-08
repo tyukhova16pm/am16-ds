@@ -15,7 +15,7 @@ void ftb(float in) {
 	printf("\n");
 }
 
-void btf(char arr[32]) {
+void btf(char arr[33]) {
     int out = 0;
     float _out;
     int i;
