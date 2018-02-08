@@ -39,9 +39,9 @@ int main() {
         break;
         }
         case 2: {
-            char arr[32];
+            char arr[33];
             printf("Enter a number in bynary form:\n");
-            scanf("%s", arr);
+            scanf("%32s", arr);
             btf(arr);
         break;
         }
