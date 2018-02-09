@@ -15,36 +15,39 @@ enum token_type {
 	DIVIDE,
 	POW,
 	LBRACKET,
-	RBRACKET // всего 8
+	RBRACKET // РІСЃРµРіРѕ 8
 };
 
 struct token {
 	token_type m_type;
-	int m_value;
+	float m_value;
 };
 
 void lex_analyze (const std::string expression, calc_queue<token> & result);
 int PRIORITY (token);
-int calculate (calc_queue<token> & infix);
+float calculate (calc_queue<token> & infix);
 void from_infix_to_postfix (calc_queue<token> & infix, calc_queue<token> & postfix);
 
 int main ()
 {
 	std::string expr = "";
-//	int i;
+	int i;
+	std::cout << "Input an arithmetical expression: " << std::endl;
 	getline (std::cin, expr, '\n');
 	//std::cout << expr << std::endl;
 	calc_queue<token> infix;
 	lex_analyze (expr, infix);
 	//std::cout << "lex done" << std::endl;
 	std::cout << " = " << calculate (infix) << std::endl;
-//	std::cin >> i; // это, чтобы окошко не пропадало.
+	std::cin >> i; // СЌС‚Рѕ С‡С‚РѕР±С‹ РѕРєРѕС€РєРѕ РЅРµ РїСЂРѕРїР°РґР°Р»Рѕ.
 	return 0;
 }
 
 void lex_analyze (const std::string expression, calc_queue<token> & result)
 {
 	token tmp;
+	float fraction = 0.0;
+	int fraction_degree = 0;
 	for (int i = 0; i < (int)expression.size (); ++i) {
 		switch (expression[i]) {
 			case '+':
@@ -68,7 +71,13 @@ void lex_analyze (const std::string expression, calc_queue<token> & result)
 			case ')':
 				tmp.m_type = RBRACKET; 
 				break;
-			case '0': // от 0 до 9
+			case '.': // СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ СЌС‚Рѕ РґРµСЃСЏС‚РёС‡РЅР°СЏ РґСЂРѕР±СЊ Р±РµР· С†РµР»РѕР№ С‡Р°СЃС‚Рё
+				while ((++i < (int)expression.size ()) && ('0' <= expression[i]) && (expression[i] <= '9')) {
+					--fraction_degree;
+					tmp.m_value += (expression[i] - '0') * (float)pow (10, fraction_degree);
+				}
+				break;
+			case '0': // РѕС‚ 0 РґРѕ 9
 			case '1':
 			case '2':
 			case '3':
@@ -78,15 +87,29 @@ void lex_analyze (const std::string expression, calc_queue<token> & result)
 			case '7':
 			case '8':
 			case '9':
-				tmp.m_type = NUMBER; // 8 - все нужные учли.
+				tmp.m_type = NUMBER; // 8 - РІСЃРµ РЅСѓР¶РЅС‹Рµ СѓС‡Р»Рё.
 				tmp.m_value = expression[i] - '0';
-				while ((++i < (int)expression.size ()) && ('0' <= expression[i]) && (expression[i] <= '9')) { // читаем до конца строки и пока число.
-					tmp.m_value = tmp.m_value * 10 + expression[i] - '0';
+				while ((++i < (int)expression.size ()) && (('0' <= expression[i]) && (expression[i] <= '9')) || ('.' == expression[i])) { // С‡РёС‚Р°РµРј РґРѕ РєРѕРЅС†Р° СЃС‚СЂРѕРєРё Рё РїРѕРєР° С‡РёСЃР»Рѕ РёР»Рё С‚РѕС‡РєР°.
+					if ('.' == expression[i]) { // С‚РѕС‡РєР° РјРѕР¶РµС‚ Р±С‹С‚СЊ С‚РѕР»СЊРєРѕ РѕРґРЅР°
+						while ((++i < (int)expression.size ()) && ('0' <= expression[i]) && (expression[i] <= '9')) {
+							--fraction_degree;
+								fraction += (expression[i] - '0') * (float)pow (10, fraction_degree);
+						}
+						--i;
+					}
+					else {
+						tmp.m_value = tmp.m_value * 10 + expression[i] - '0';
+					}
 				}
 				--i;
+				if (fraction_degree < 0) {
+					tmp.m_value += fraction;
+				}
+				fraction = 0.0;
+				fraction_degree = 0;				
 				break;
 			case ' ':
-				continue; // пропускаем разделители
+				continue; // РїСЂРѕРїСѓСЃРєР°РµРј СЂР°Р·РґРµР»РёС‚РµР»Рё
 			case '\t':
 				continue;
 			default:
@@ -121,10 +144,10 @@ void from_infix_to_postfix (calc_queue<token> & infix, calc_queue<token> & postf
 {
 	calc_stack<token> st;
 	token tmp;
-	token prev; // для унарного минуса
+	token prev; // РґР»СЏ СѓРЅР°СЂРЅРѕРіРѕ РјРёРЅСѓСЃР°
 	token from_stack;
 
-	prev.m_type = LBRACKET; // инициализируем чем-нибудь, что не NUMBER и не RBRACKET
+	prev.m_type = LBRACKET; // РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј С‡РµРј-РЅРёР±СѓРґСЊ, С‡С‚Рѕ РЅРµ NUMBER Рё РЅРµ RBRACKET
 
 	while (infix.size () > 0) {
 		switch ((tmp = infix.get ()).m_type) {
@@ -141,11 +164,11 @@ void from_infix_to_postfix (calc_queue<token> & infix, calc_queue<token> & postf
 				break;
 			case MINUS:
 				if ((prev.m_type != NUMBER) && (prev.m_type != RBRACKET)) {
-					tmp.m_type = UNAR_MINUS; // меняем тип токена с минуса на унарный минус
+					tmp.m_type = UNAR_MINUS; // РјРµРЅСЏРµРј С‚РёРї С‚РѕРєРµРЅР° СЃ РјРёРЅСѓСЃР° РЅР° СѓРЅР°СЂРЅС‹Р№ РјРёРЅСѓСЃ
 					st << tmp;
 					break;
 				}
-				//здесь только проверка на унарный минус, поэтому нет break
+				//Р·РґРµСЃСЊ С‚РѕР»СЊРєРѕ РїСЂРѕРІРµСЂРєР° РЅР° СѓРЅР°СЂРЅС‹Р№ РјРёРЅСѓСЃ, РїРѕСЌС‚РѕРјСѓ РЅРµС‚ break
 			default:
 				while (st.size ()) {
 					if (PRIORITY (from_stack = st.pop()) >= PRIORITY (tmp)) {
@@ -166,13 +189,13 @@ void from_infix_to_postfix (calc_queue<token> & infix, calc_queue<token> & postf
 	//std::cout << "inf to pref done" << std::endl;
 }
 
-int calculate (calc_queue<token> & infix)
+float calculate (calc_queue<token> & infix)
 {
 	calc_queue<token> postfix;
 	from_infix_to_postfix (infix, postfix);
-	calc_stack<int> st;
+	calc_stack<float> st;
 	token tmp;
-	int calc;
+	float calc;
 
 	while (postfix.size () > 0) {
 		switch ((tmp = postfix.get ()).m_type) {
@@ -193,7 +216,7 @@ int calculate (calc_queue<token> & infix)
 					std::cout << "Bad expression 2";
 					throw std::runtime_error ("Bad expression");
 				}
-				st << -st.pop () + st.pop (); // знаки такие, потому что достаем из стека
+				st << -st.pop () + st.pop (); // Р·РЅР°РєРё С‚Р°РєРёРµ, РїРѕС‚РѕРјСѓ С‡С‚Рѕ РґРѕСЃС‚Р°РµРј РёР· СЃС‚РµРєР°
 				//std::cout << "-" << std::endl;
 				break;
 			case PLUS:
@@ -218,11 +241,11 @@ int calculate (calc_queue<token> & infix)
 					throw std::runtime_error ("Bad expression");
 				}
 				calc = st.pop ();
-				if (0 == calc) {
+				if (calc - 0.0 < 1.175494351e-38) { // calc == 0
 					std::cout << "Divivsion by zero";
 					throw std::runtime_error ("Division by zero");
 				}
-				st << st.pop () / calc; // кстати, деление у нас целочисленное, хотя можно было заморочиться с точкой и врубить float
+				st << st.pop () / calc;
 				//std::cout << "/" << std::endl;
 				break;
 			case POW:
@@ -231,7 +254,7 @@ int calculate (calc_queue<token> & infix)
 					throw std::runtime_error ("Bad expression");
 				}
 				calc = st.pop ();
-				st << (int)pow (st.pop (), calc); // по той же причине степень с отрицательным показателем = 0
+				st << (float)pow (st.pop (), calc);
 				//std::cout << "^" << std::endl;
 				break;
 		}
