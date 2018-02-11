@@ -25,7 +25,7 @@ Void bintodec(){   //преобразование двоичного в деся
     
     char binary[33];
     	printf("Введите десятичное число:\n");\
-    	scanf("%s",&binary);	
+    	scanf("%s",binary);	
 	int i;
 	int f=0;
      	for (i=0; i<32; i++)
