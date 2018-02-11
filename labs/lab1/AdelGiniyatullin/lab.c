@@ -23,7 +23,7 @@ Void dectobin() { // преобразование десятичного в дв
 Void bintodec(){   //преобразование двоичного в десятичное 
     
     
-    char binary;
+    char binary[33];
     	printf("Введите десятичное число:\n");\
     	scanf("%s",&binary);	
 	int i;
