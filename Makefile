@@ -1,9 +1,9 @@
-all: lab1
- lab1: lab1.o
- 	gcc lab1.o -o lab1
+all: calc
+ calc: calc.o
+ 	g++ calc.o -o calc
  
- lab1.o: lab1.c
- 	gcc -c lab1.c
+ calc.o: calc.cpp
+ 	g++ -c calc.cpp
  
  clean:
- 	rm -rf *.o lab1
+ 	rm -rf *.o calc
