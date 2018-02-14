@@ -7,7 +7,7 @@ char win1251[256];
 char utf8[65536];
 unsigned char codesKoiToWin[256];
 unsigned char codesWinToKoi[256];
-unsigned short int codesKoiToUTF[256]; // лень париться с ними, поэтому пусть будут здесь
+unsigned short int codesKoiToUTF[256]; // Р»РµРЅСЊ РїР°СЂРёС‚СЊСЃСЏ СЃ РЅРёРјРё, РїРѕСЌС‚РѕРјСѓ РїСѓСЃС‚СЊ Р±СѓРґСѓС‚ Р·РґРµСЃСЊ
 unsigned short int codesWinToUTF[256];
 
 int IdentifyEncoding (const std::vector<unsigned char> input); // 0 - unknown, 1 - koi8, 2 - win1251
@@ -22,9 +22,9 @@ void convert_to_UTF_and_print_into_file (const std::vector<unsigned char> input,
 
 int main ()
 {
-	/////------------------------------| Подготовочная часть |------------------------------/////
+	/////------------------------------| РџРѕРґРіРѕС‚РѕРІРѕС‡РЅР°СЏ С‡Р°СЃС‚СЊ |------------------------------/////
 
-	//system ("chcp 1251"); // включаем для отладки в винде.
+	//system ("chcp 1251"); // РІРєР»СЋС‡Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё РІ РІРёРЅРґРµ.
 
 	for (int i = 0; i < 256; ++i) {
 		koi8[i] = 0;
@@ -34,47 +34,47 @@ int main ()
 		utf8[i] = 0;
 	}
 
-	koi8[0xA3] = 'ё';	koi8[0xB3] = 'Ё';
+	koi8[0xA3] = 'С‘';	koi8[0xB3] = 'РЃ';
 
-	koi8[0xC0] = 'ю'; 	koi8[0xC1] = 'а';	koi8[0xC2] = 'б';	koi8[0xC3] = 'ц';
-	koi8[0xC4] = 'д';	koi8[0xC5] = 'е';	koi8[0xC6] = 'ф';	koi8[0xC7] = 'г';
-	koi8[0xC8] = 'х';	koi8[0xC9] = 'и';	koi8[0xCA] = 'й';	koi8[0xCB] = 'к';
-	koi8[0xCC] = 'л';	koi8[0xCD] = 'м';	koi8[0xCE] = 'н';	koi8[0xCF] = 'о';
-	koi8[0xD0] = 'п';	koi8[0xD1] = 'я';	koi8[0xD2] = 'р';	koi8[0xD3] = 'с';
-	koi8[0xD4] = 'т';	koi8[0xD5] = 'у';	koi8[0xD6] = 'ж';	koi8[0xD7] = 'в';
-	koi8[0xD8] = 'ь';	koi8[0xD9] = 'ы';	koi8[0xDA] = 'з';	koi8[0xDB] = 'ш';
-	koi8[0xDC] = 'э';	koi8[0xDD] = 'щ';	koi8[0xDE] = 'ч';	koi8[0xDF] = 'ъ';
+	koi8[0xC0] = 'СЋ'; 	koi8[0xC1] = 'Р°';	koi8[0xC2] = 'Р±';	koi8[0xC3] = 'С†';
+	koi8[0xC4] = 'Рґ';	koi8[0xC5] = 'Рµ';	koi8[0xC6] = 'С„';	koi8[0xC7] = 'Рі';
+	koi8[0xC8] = 'С…';	koi8[0xC9] = 'Рё';	koi8[0xCA] = 'Р№';	koi8[0xCB] = 'Рє';
+	koi8[0xCC] = 'Р»';	koi8[0xCD] = 'Рј';	koi8[0xCE] = 'РЅ';	koi8[0xCF] = 'Рѕ';
+	koi8[0xD0] = 'Рї';	koi8[0xD1] = 'СЏ';	koi8[0xD2] = 'СЂ';	koi8[0xD3] = 'СЃ';
+	koi8[0xD4] = 'С‚';	koi8[0xD5] = 'Сѓ';	koi8[0xD6] = 'Р¶';	koi8[0xD7] = 'РІ';
+	koi8[0xD8] = 'СЊ';	koi8[0xD9] = 'С‹';	koi8[0xDA] = 'Р·';	koi8[0xDB] = 'С€';
+	koi8[0xDC] = 'СЌ';	koi8[0xDD] = 'С‰';	koi8[0xDE] = 'С‡';	koi8[0xDF] = 'СЉ';
 
-	koi8[0xE0] = 'Ю';	koi8[0xE1] = 'А';	koi8[0xE2] = 'Б';	koi8[0xE3] = 'Ц';
-	koi8[0xE4] = 'Д';	koi8[0xE5] = 'Е';	koi8[0xE6] = 'Ф';	koi8[0xE7] = 'Г';
-	koi8[0xE8] = 'Х';	koi8[0xE9] = 'И';	koi8[0xEA] = 'Й';	koi8[0xEB] = 'К';
-	koi8[0xEC] = 'Л';	koi8[0xED] = 'М';	koi8[0xEE] = 'Н';	koi8[0xEF] = 'О';
-	koi8[0xF0] = 'П';	koi8[0xF1] = 'Я';	koi8[0xF2] = 'Р';	koi8[0xF3] = 'С';
-	koi8[0xF4] = 'Т';	koi8[0xF5] = 'У';	koi8[0xF6] = 'Ж';	koi8[0xF7] = 'В';
-	koi8[0xF8] = 'Ь';	koi8[0xF9] = 'Ы';	koi8[0xFA] = 'З';	koi8[0xFB] = 'Ш';
-	koi8[0xFC] = 'Э';	koi8[0xFD] = 'Щ';	koi8[0xFE] = 'Ч';	koi8[0xFF] = 'Ъ';
+	koi8[0xE0] = 'Р®';	koi8[0xE1] = 'Рђ';	koi8[0xE2] = 'Р‘';	koi8[0xE3] = 'Р¦';
+	koi8[0xE4] = 'Р”';	koi8[0xE5] = 'Р•';	koi8[0xE6] = 'Р¤';	koi8[0xE7] = 'Р“';
+	koi8[0xE8] = 'РҐ';	koi8[0xE9] = 'Р';	koi8[0xEA] = 'Р™';	koi8[0xEB] = 'Рљ';
+	koi8[0xEC] = 'Р›';	koi8[0xED] = 'Рњ';	koi8[0xEE] = 'Рќ';	koi8[0xEF] = 'Рћ';
+	koi8[0xF0] = 'Рџ';	koi8[0xF1] = 'РЇ';	koi8[0xF2] = 'Р ';	koi8[0xF3] = 'РЎ';
+	koi8[0xF4] = 'Рў';	koi8[0xF5] = 'РЈ';	koi8[0xF6] = 'Р–';	koi8[0xF7] = 'Р’';
+	koi8[0xF8] = 'Р¬';	koi8[0xF9] = 'Р«';	koi8[0xFA] = 'Р—';	koi8[0xFB] = 'РЁ';
+	koi8[0xFC] = 'Р­';	koi8[0xFD] = 'Р©';	koi8[0xFE] = 'Р§';	koi8[0xFF] = 'РЄ';
 
-	win1251[0xA8] = 'Ё'; win1251[0xB8] = 'ё';
+	win1251[0xA8] = 'РЃ'; win1251[0xB8] = 'С‘';
 	for (int i = 0; i < 32; ++i) {
-		win1251[0xC0 + i] = 'Б' + i - 1;
-		win1251[0xE0 + i] = 'б' + i - 1;
+		win1251[0xC0 + i] = 'Р‘' + i - 1;
+		win1251[0xE0 + i] = 'Р±' + i - 1;
 	}
 
-	utf8[0xD001] = 'Ё'; utf8[0xD191] = 'ё';
+	utf8[0xD001] = 'РЃ'; utf8[0xD191] = 'С‘';
 	for (int i = 0; i < 16; ++i) {
-		utf8[0xD090 + i] = 'Б' + i - 1;
-		utf8[0xD0B0 + i] = 'б' + i - 1;
+		utf8[0xD090 + i] = 'Р‘' + i - 1;
+		utf8[0xD0B0 + i] = 'Р±' + i - 1;
 	}
 	for (int i = 0; i < 16; ++i) {
-		utf8[0xD090 + i + 16] = 'Р' + i;
-		utf8[0xD180 + i] = 'р' + i; // т.к. маленькие буквы лежат неровно, делаем два цикла
+		utf8[0xD090 + i + 16] = 'Р ' + i;
+		utf8[0xD180 + i] = 'СЂ' + i; // С‚.Рє. РјР°Р»РµРЅСЊРєРёРµ Р±СѓРєРІС‹ Р»РµР¶Р°С‚ РЅРµСЂРѕРІРЅРѕ, РґРµР»Р°РµРј РґРІР° С†РёРєР»Р°
 	}
 
-	for (int i = 0; i < 0xC0; ++i) { // символы ASCII и нерусскую часть остального не меняем, т.к. хз во что.
+	for (int i = 0; i < 0xC0; ++i) { // СЃРёРјРІРѕР»С‹ ASCII Рё РЅРµСЂСѓСЃСЃРєСѓСЋ С‡Р°СЃС‚СЊ РѕСЃС‚Р°Р»СЊРЅРѕРіРѕ РЅРµ РјРµРЅСЏРµРј, С‚.Рє. С…Р· РІРѕ С‡С‚Рѕ.
 		codesKoiToWin[i] = i;
 		codesWinToKoi[i] = i;
 	}
-	for (int i_win = 0x80; i_win <= 0xFF; ++i_win) { // составляем таблицу перевода KOI в Win
+	for (int i_win = 0x80; i_win <= 0xFF; ++i_win) { // СЃРѕСЃС‚Р°РІР»СЏРµРј С‚Р°Р±Р»РёС†Сѓ РїРµСЂРµРІРѕРґР° KOI РІ Win
 		for (int i_koi = 0x80; i_koi <= 0xFF; ++i_koi) {
 			if (koi8[i_koi] == win1251[i_win]) {
 				codesKoiToWin[i_koi] = i_win;
@@ -83,11 +83,11 @@ int main ()
 		}
 	}
 	
-	for (int i = 0; i < 0xC0; ++i) { // символы ASCII и нерусскую часть остального не меняем, т.к. хз во что.
+	for (int i = 0; i < 0xC0; ++i) { // СЃРёРјРІРѕР»С‹ ASCII Рё РЅРµСЂСѓСЃСЃРєСѓСЋ С‡Р°СЃС‚СЊ РѕСЃС‚Р°Р»СЊРЅРѕРіРѕ РЅРµ РјРµРЅСЏРµРј, С‚.Рє. С…Р· РІРѕ С‡С‚Рѕ.
 		codesWinToUTF[i] = i;
 		codesKoiToUTF[i] = i;
 	}
-	for (int i_win = 0x80; i_win <= 0xFF; ++i_win) { // составляем таблицу перевода в UTF-8
+	for (int i_win = 0x80; i_win <= 0xFF; ++i_win) { // СЃРѕСЃС‚Р°РІР»СЏРµРј С‚Р°Р±Р»РёС†Сѓ РїРµСЂРµРІРѕРґР° РІ UTF-8
 		for (int i_utf = 0xD090; i_utf <= 0xD18F; ++i_utf) {
 			if (utf8[i_utf] == win1251[i_win]) {
 				codesWinToUTF[i_win] = i_utf;
@@ -96,13 +96,13 @@ int main ()
 		}
 	}
 	codesKoiToUTF[0xA3] = 0xD191; codesKoiToUTF[0xB3] = 0xD001;
-	codesWinToUTF[0xB8] = 0xD191; codesWinToUTF[0xA8] = 0xD001; // буква ё
+	codesWinToUTF[0xB8] = 0xD191; codesWinToUTF[0xA8] = 0xD001; // Р±СѓРєРІР° С‘
 
-	/////------------------------------| Подготовочная часть закончена |------------------------------/////
+	/////------------------------------| РџРѕРґРіРѕС‚РѕРІРѕС‡РЅР°СЏ С‡Р°СЃС‚СЊ Р·Р°РєРѕРЅС‡РµРЅР° |------------------------------/////
 
 	std::ifstream text ("disp.txt", std::ifstream::binary);
 	if (!text.is_open()) {
-		throw std::runtime_error ("нет файла со вводом");
+		throw std::runtime_error ("РЅРµС‚ С„Р°Р№Р»Р° СЃРѕ РІРІРѕРґРѕРј");
 	}
 	std::ofstream output ("result.txt", std::ofstream::binary);
 	std::vector<unsigned char> input;
@@ -111,15 +111,15 @@ int main ()
 
 	char c;
 	while (text.get (c)) {
-		fromfile.push_back (c); // читаем в строку
+		fromfile.push_back (c); // С‡РёС‚Р°РµРј РІ СЃС‚СЂРѕРєСѓ
 	}
 	//std::cout << std::endl;
 	const char * chars = fromfile.data ();
-	const unsigned char* data_bytes = reinterpret_cast<const unsigned char*>(chars); // переводим эту строку в unsigned char
+	const unsigned char* data_bytes = reinterpret_cast<const unsigned char*>(chars); // РїРµСЂРµРІРѕРґРёРј СЌС‚Сѓ СЃС‚СЂРѕРєСѓ РІ unsigned char
 
 	//std::cout << "done\n";
 	for (int i = 0; i < fromfile.size (); ++i) {
-		input.push_back (data_bytes[i]); // для перекодировок хочу векторы.
+		input.push_back (data_bytes[i]); // РґР»СЏ РїРµСЂРµРєРѕРґРёСЂРѕРІРѕРє С…РѕС‡Сѓ РІРµРєС‚РѕСЂС‹.
 		//std::cout << koi8[codesWinToKoi[data_bytes[i]]] << win1251[data_bytes[i]] << std::endl;
 	}
 
@@ -127,7 +127,7 @@ int main ()
 	std::vector<unsigned char> * new_inputKoiToWin;
 	std::vector<unsigned char> * new_inputWinToKoi;
 	int encoding = IdentifyEncoding (input);
-	if (encoding != 0) { // сходу определили кодировку
+	if (encoding != 0) { // СЃС…РѕРґСѓ РѕРїСЂРµРґРµР»РёР»Рё РєРѕРґРёСЂРѕРІРєСѓ
 		convert_to_UTF_and_print_into_file (input, output, encoding);
 	}
 	else {
@@ -135,7 +135,7 @@ int main ()
 		new_inputWinToKoi = &input;
 		for (int i = 0; i < 3; ++i) {
 			converted = ConvertFromKoi8ToWin1251 (*new_inputKoiToWin);
-			if (i > 0) { // обычный input удалять не хотим
+			if (i > 0) { // РѕР±С‹С‡РЅС‹Р№ input СѓРґР°Р»СЏС‚СЊ РЅРµ С…РѕС‚РёРј
 				delete new_inputKoiToWin;
 			}
 			new_inputKoiToWin = converted;
@@ -149,7 +149,7 @@ int main ()
 			}
 
 			converted = ConvertFromWin1251ToKoi8 (*new_inputWinToKoi);
-			if (i > 0) { // обычный input удалять не хотим
+			if (i > 0) { // РѕР±С‹С‡РЅС‹Р№ input СѓРґР°Р»СЏС‚СЊ РЅРµ С…РѕС‚РёРј
 				delete new_inputWinToKoi;
 			}
 			new_inputWinToKoi = converted;
@@ -208,11 +208,11 @@ std::vector<unsigned short int> * ConvertFromWin1251ToUTF8 (const std::vector<un
 
 int IdentifyEncoding (const std::vector<unsigned char> input) { // 0 - unknown, 1 - koi8, 2 - win1251
 	unsigned char mfs = most_frequent_symbol (input);
-	if ('о' == koi8[mfs]) {
+	if ('Рѕ' == koi8[mfs]) {
 		//std::cout << 1 << ' ' << mfs << ";\n";
 		return 1;
 	}
-	else if ('о' == win1251[mfs]) {
+	else if ('Рѕ' == win1251[mfs]) {
 		//std::cout << 2 << ' ' << mfs << ";\n";
 		return 2;
 	}
@@ -231,11 +231,11 @@ unsigned char most_frequent_symbol (const std::vector<unsigned char> input) {
 		symb_count[i] = 0;
 	}
 	for (int i = 0; i < input.size (); ++i) {
-		if (input[i] < 0x80) { // символы ASCII нас не интересуют
+		if (input[i] < 0x80) { // СЃРёРјРІРѕР»С‹ ASCII РЅР°СЃ РЅРµ РёРЅС‚РµСЂРµСЃСѓСЋС‚
 			continue;
 		}
 		++symb_count[input[i]];
-	} // собираем статистику
+	} // СЃРѕР±РёСЂР°РµРј СЃС‚Р°С‚РёСЃС‚РёРєСѓ
 
 	for (int i = 0xC0; i < 0xFF; ++i) {
 		if (symb_count[i] > symb_count[most_frequent_one]) {
@@ -256,15 +256,15 @@ void convert_to_UTF_and_print_into_file (const std::vector<unsigned char> input,
 			converted = ConvertFromWin1251ToUTF8 (input);
 			break;
 		default:
-			return; // кидаться ничем не буду, потому что больно
+			return; // РєРёРґР°С‚СЊСЃСЏ РЅРёС‡РµРј РЅРµ Р±СѓРґСѓ, РїРѕС‚РѕРјСѓ С‡С‚Рѕ Р±РѕР»СЊРЅРѕ
 	}
 	for (int i = 0; i < converted->size (); ++i) {
-		if ((*converted)[i] <= 0xFF ) { // однобайтовое == ASCII
+		if ((*converted)[i] <= 0xFF ) { // РѕРґРЅРѕР±Р°Р№С‚РѕРІРѕРµ == ASCII
 			out.put ((char)(*converted)[i]);
 		}
-		else { // двухбайтовые символы
-			out.put ((char)(((*converted)[i] & 0xFF00) >> 8)); // первый байт
-			out.put ((char)(((*converted)[i] & 0x00FF)     )); // второй байт
+		else { // РґРІСѓС…Р±Р°Р№С‚РѕРІС‹Рµ СЃРёРјРІРѕР»С‹
+			out.put ((char)(((*converted)[i] & 0xFF00) >> 8)); // РїРµСЂРІС‹Р№ Р±Р°Р№С‚
+			out.put ((char)(((*converted)[i] & 0x00FF)     )); // РІС‚РѕСЂРѕР№ Р±Р°Р№С‚
 		}
 	}
 	delete converted;
