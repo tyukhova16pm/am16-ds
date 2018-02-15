@@ -1,30 +1,46 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include "codes.h"
+
+enum encoding {
+	UNKNOWN = 0,
+	KOI = 1,
+	WIN = 2
+};
+
+enum transcoding {
+	NONE = 0,
+	KOI_TO_WIN = 1,
+	WIN_TO_KOI = 2
+};
 
 char koi8[256];
 char win1251[256];
 char utf8[65536];
+#ifndef CODES_HEADER_
 unsigned char codesKoiToWin[256];
 unsigned char codesWinToKoi[256];
-unsigned short int codesKoiToUTF[256]; // лень париться с ними, поэтому пусть будут здесь
+unsigned short int codesKoiToUTF[256];
 unsigned short int codesWinToUTF[256];
+#endif
 
-int IdentifyEncoding (const std::vector<unsigned char> input); // 0 - unknown, 1 - koi8, 2 - win1251
+encoding IdentifyEncoding (const std::vector<unsigned char> input); // 0 - unknown, 1 - koi8, 2 - win1251
 unsigned char most_frequent_symbol    (const std::vector<unsigned char> input);
 
-std::vector<unsigned short int> * ConvertFromKoi8ToUTF8 (const std::vector<unsigned char> koi_input);
-std::vector<unsigned short int> * ConvertFromWin1251ToUTF8 (const std::vector<unsigned char> win_input);
 std::vector<unsigned char> * ConvertFromWin1251ToKoi8 (const std::vector<unsigned char> win_input);
 std::vector<unsigned char> * ConvertFromKoi8ToWin1251 (const std::vector<unsigned char> koi_input);
 
-void convert_to_UTF_and_print_into_file (const std::vector<unsigned char> input, std::ofstream & out, int encoding);
+
+void convert_to_UTF_and_print_into_file (std::ifstream & input, std::ofstream & out, encoding encod, transcoding * trans);
 
 int main ()
 {
 	/////------------------------------| Подготовочная часть |------------------------------/////
 
-	//system ("chcp 1251"); // включаем для отладки в винде.
+	#ifdef _WIN32
+	system ("chcp 1251"); // для отладки в винде.
+	#endif
 
 	for (int i = 0; i < 256; ++i) {
 		koi8[i] = 0;
@@ -69,37 +85,137 @@ int main ()
 		utf8[0xD090 + i + 16] = 'Р' + i;
 		utf8[0xD180 + i] = 'р' + i; // т.к. маленькие буквы лежат неровно, делаем два цикла
 	}
+	//------------------| Заполнение codes.h |------------------
 
+#ifndef CODES_HEADER_
+
+	std::ofstream header ("codes.h", std::ofstream::binary);
+	header << "#ifndef CODES_HEADER_\n" << "#define CODES_HEADER_\n\n";										
+
+	header << "unsigned char codesKoiToWin[256] = {";
 	for (int i = 0; i < 0xC0; ++i) { // символы ASCII и нерусскую часть остального не меняем, т.к. хз во что.
-		codesKoiToWin[i] = i;
-		codesWinToKoi[i] = i;
+		if (0xA3 == i) {
+			header << 0xB8 << ", ";
+		}
+		else if (0xB3 == i) {
+			header << 0xA8 << ", ";
+		}
+		else {
+			header << i << ", ";
+		}
+		if (i % 32 == 31) {
+			header << "\n" << "\t\t\t\t\t\t\t\t\t";
+		}
 	}
-	for (int i_win = 0x80; i_win <= 0xFF; ++i_win) { // составляем таблицу перевода KOI в Win
-		for (int i_koi = 0x80; i_koi <= 0xFF; ++i_koi) {
+	for (int i_koi = 0xC0; i_koi <= 0xFF; ++i_koi) { // составляем таблицу перевода KOI в Win и обратно
+		for (int i_win = 0xC0; i_win <= 0xFF; ++i_win) {
 			if (koi8[i_koi] == win1251[i_win]) {
-				codesKoiToWin[i_koi] = i_win;
-				codesWinToKoi[i_win] = i_koi;
+				header << i_win;
+				if (i_koi != 0xFF) {
+					header << ", ";
+					if (i_koi % 32 == 31) {
+						header << "\n" << "\t\t\t\t\t\t\t\t\t";
+					}
+				}			
 			}
 		}
 	}
+	header << "};\n";
 	
+	header << "unsigned char codesWinToKoi[256] = {";
 	for (int i = 0; i < 0xC0; ++i) { // символы ASCII и нерусскую часть остального не меняем, т.к. хз во что.
-		codesWinToUTF[i] = i;
-		codesKoiToUTF[i] = i;
+		if (0xB8 == i) {
+			header << 0xA3 << ", ";
+		}
+		else if (0xA8 == i) {
+			header << 0xB3 << ", ";
+		}
+		else {
+			header << i << ", ";
+		}
+		if (i % 32 == 31) {
+			header << "\n" << "\t\t\t\t\t\t\t\t\t";
+		}
 	}
-	for (int i_win = 0x80; i_win <= 0xFF; ++i_win) { // составляем таблицу перевода в UTF-8
+	for (int i_win = 0xC0; i_win <= 0xFF; ++i_win) { // составляем таблицу перевода KOI в Win и обратно
+		for (int i_koi = 0xC0; i_koi <= 0xFF; ++i_koi) {
+			if (koi8[i_koi] == win1251[i_win]) {
+				header << i_koi;
+				if (i_win != 0xFF) {
+					header << ", ";
+					if (i_win % 32 == 31) {
+						header << "\n" << "\t\t\t\t\t\t\t\t\t";
+					}
+				}
+			}
+		}
+	}
+	header << "};\n";
+
+	header << "unsigned short int codesKoiToUTF[256] = {";
+	for (int i = 0; i < 0xC0; ++i) { // символы ASCII не меняем, не забываем про букву ё
+		if (0xA3 == i) {
+			header << 0xD191 << ", ";
+		}
+		else if (0xB3 == i) {
+			header << 0xD001 << ", ";
+		}
+		else {
+			header << i << ", ";
+		}
+		if (i % 32 == 31) {
+			header << "\n" << "\t\t\t\t\t\t\t\t\t";
+		}
+	}
+	for (int i_koi = 0xC0; i_koi <= 0xFF; ++i_koi) { // составляем таблицу перевода в UTF-8
+		for (int i_utf = 0xD090; i_utf <= 0xD18F; ++i_utf) {
+			if (utf8[i_utf] == koi8[i_koi]) {
+				header << i_utf;
+				if (i_koi != 0xFF) {
+					header << ", ";
+					if (i_koi % 16 == 15) {
+						header << "\n" << "\t\t\t\t\t\t\t\t\t";
+					}
+				}
+			}
+		}
+	}
+	header << "};\n";
+
+	header << "unsigned short int codesWinToUTF[256] = {";
+	for (int i = 0; i < 0xC0; ++i) { // символы ASCII не меняем, не забываем про букву ё
+		if (0xB8 == i) {
+			header << 0xD191 << ", ";
+		}
+		else if (0xA8 == i) {
+			header << 0xD001 << ", ";
+		}
+		else {
+			header << i << ", ";
+		}
+		if (i % 32 == 31) {
+			header << "\n" << "\t\t\t\t\t\t\t\t\t";
+		}
+	}
+	for (int i_win = 0xC0; i_win <= 0xFF; ++i_win) { // составляем таблицу перевода в UTF-8
 		for (int i_utf = 0xD090; i_utf <= 0xD18F; ++i_utf) {
 			if (utf8[i_utf] == win1251[i_win]) {
-				codesWinToUTF[i_win] = i_utf;
-				codesKoiToUTF[codesWinToKoi[i_win]] = i_utf;
+				header << i_utf;
+				if (i_win != 0xFF) {
+					header << ", ";
+					if (i_win % 16 == 15) {
+						header << "\n" << "\t\t\t\t\t\t\t\t\t";
+					}
+				}
 			}
 		}
 	}
-	codesKoiToUTF[0xA3] = 0xD191; codesKoiToUTF[0xB3] = 0xD001;
-	codesWinToUTF[0xB8] = 0xD191; codesWinToUTF[0xA8] = 0xD001; // буква ё
+	header << "};\n";
+	header << "\n" << "#endif";
 
-	/////------------------------------| Подготовочная часть закончена |------------------------------/////
-
+	header.close ();
+	//////------------------------------| Подготовочная часть закончена |------------------------------/////
+#else // если header есть.
 	std::ifstream text ("disp.txt", std::ifstream::binary);
 	if (!text.is_open()) {
 		throw std::runtime_error ("нет файла со вводом");
@@ -107,55 +223,57 @@ int main ()
 	std::ofstream output ("result.txt", std::ofstream::binary);
 	std::vector<unsigned char> input;
 	std::string fromfile;
-	//std::cout << "done\n";
 
 	char c;
-	while (text.get (c)) {
-		fromfile.push_back (c); // читаем в строку
+	while (text.get (c) && fromfile.size () < 1000) {
+		if ((unsigned char)c > 0x80) {
+			fromfile.push_back (c); // читаем в строку только русские символы Больше 1000 нам особо не понадобится
+		}
 	}
-	//std::cout << std::endl;
 	const char * chars = fromfile.data ();
 	const unsigned char* data_bytes = reinterpret_cast<const unsigned char*>(chars); // переводим эту строку в unsigned char
 
-	//std::cout << "done\n";
 	for (int i = 0; i < fromfile.size (); ++i) {
 		input.push_back (data_bytes[i]); // для перекодировок хочу векторы.
-		//std::cout << koi8[codesWinToKoi[data_bytes[i]]] << win1251[data_bytes[i]] << std::endl;
 	}
-
 	std::vector<unsigned char> * converted;
 	std::vector<unsigned char> * new_inputKoiToWin;
 	std::vector<unsigned char> * new_inputWinToKoi;
-	int encoding = IdentifyEncoding (input);
-	if (encoding != 0) { // сходу определили кодировку
-		convert_to_UTF_and_print_into_file (input, output, encoding);
+
+	transcoding transKoiToWin[3] = {NONE, NONE, NONE};
+	transcoding transWinToKoi[3] = {NONE, NONE, NONE};
+	encoding encod = IdentifyEncoding (input);
+	if (encod != UNKNOWN) { // сходу определили кодировку
+		convert_to_UTF_and_print_into_file (text, output, encod, transKoiToWin); // неважно какой тут trans, они оба в начале нулевые.
 	}
 	else {
 		new_inputKoiToWin = &input;
 		new_inputWinToKoi = &input;
 		for (int i = 0; i < 3; ++i) {
+			transKoiToWin[i] = KOI_TO_WIN;
 			converted = ConvertFromKoi8ToWin1251 (*new_inputKoiToWin);
 			if (i > 0) { // обычный input удалять не хотим
 				delete new_inputKoiToWin;
 			}
 			new_inputKoiToWin = converted;
-			encoding = IdentifyEncoding (*new_inputKoiToWin);
-			if (encoding != 0) {
-				convert_to_UTF_and_print_into_file (*new_inputKoiToWin, output, encoding);
+			encod = IdentifyEncoding (*new_inputKoiToWin);
+			if (encod != UNKNOWN) {
+				convert_to_UTF_and_print_into_file (text, output, encod, transKoiToWin);
 				if (i > 0) {
 					delete new_inputKoiToWin;
 				}
 				break;
 			}
 
+			transWinToKoi[i] = WIN_TO_KOI;
 			converted = ConvertFromWin1251ToKoi8 (*new_inputWinToKoi);
 			if (i > 0) { // обычный input удалять не хотим
 				delete new_inputWinToKoi;
 			}
 			new_inputWinToKoi = converted;
-			encoding = IdentifyEncoding (*new_inputWinToKoi);
-			if (encoding != 0) {
-				convert_to_UTF_and_print_into_file (*new_inputWinToKoi, output, encoding);
+			encod = IdentifyEncoding (*new_inputWinToKoi);
+			if (encod != UNKNOWN) {
+				convert_to_UTF_and_print_into_file (text, output, encod, transWinToKoi);
 				if (i > 0) {
 					delete new_inputWinToKoi;
 				}
@@ -168,6 +286,7 @@ int main ()
 	output.close ();
 	std::cin >> c;
 
+#endif
 	return 0;
 }
 
@@ -188,84 +307,99 @@ std::vector<unsigned char> * ConvertFromWin1251ToKoi8 (const std::vector<unsigne
 	return result;
 }
 
-std::vector<unsigned short int> * ConvertFromKoi8ToUTF8 (const std::vector<unsigned char> koi_input)
-{
-	std::vector<unsigned short int> * result = new std::vector<unsigned short int>;
-	for (int i = 0; i < koi_input.size (); ++i) {
-		result->push_back (codesKoiToUTF[koi_input[i]]);
-	}
-	return result;
-}
-
-std::vector<unsigned short int> * ConvertFromWin1251ToUTF8 (const std::vector<unsigned char> win_input)
-{
-	std::vector<unsigned short int> * result = new std::vector<unsigned short int>;
-	for (int i = 0; i < win_input.size (); ++i) {
-		result->push_back (codesWinToUTF[win_input[i]]);
-	}
-	return result;
-}
-
-int IdentifyEncoding (const std::vector<unsigned char> input) { // 0 - unknown, 1 - koi8, 2 - win1251
+encoding IdentifyEncoding (const std::vector<unsigned char> input) { // 0 - unknown, 1 - koi8, 2 - win1251
 	unsigned char mfs = most_frequent_symbol (input);
 	if ('о' == koi8[mfs]) {
-		//std::cout << 1 << ' ' << mfs << ";\n";
-		return 1;
+		std::cout << "koi\n";
+		return KOI;
 	}
 	else if ('о' == win1251[mfs]) {
-		//std::cout << 2 << ' ' << mfs << ";\n";
-		return 2;
+		std::cout << "win\n";
+		return WIN;		
 	}
 	else {
-		//std::cout << 0 << ' ' << mfs << ";\n";
-		return 0;
-	}
+		std::cout << "unknown\n";
+		return UNKNOWN;		
+	}	
 }
 
 unsigned char most_frequent_symbol (const std::vector<unsigned char> input) {
 	int symb_count[256];
 	unsigned char most_frequent_one = 0xC0;
-	int amount;
-
+	
 	for (int i = 0; i < 0xFF; ++i) {
-		symb_count[i] = 0;
+		symb_count[i] = 0;		
 	}
 	for (int i = 0; i < input.size (); ++i) {
 		if (input[i] < 0x80) { // символы ASCII нас не интересуют
-			continue;
+			continue;		
 		}
-		++symb_count[input[i]];
+		++symb_count[input[i]];		
 	} // собираем статистику
-
+	
 	for (int i = 0xC0; i < 0xFF; ++i) {
 		if (symb_count[i] > symb_count[most_frequent_one]) {
-			most_frequent_one = i;
-		}
+			most_frequent_one = i;			
+		}		
 	}
 	return most_frequent_one;
 }
 
-void convert_to_UTF_and_print_into_file (const std::vector<unsigned char> input, std::ofstream & out, int encoding)
+void convert_to_UTF_and_print_into_file (std::ifstream & input, std::ofstream & out, encoding encod, transcoding * trans)
 {
-	std::vector<unsigned short int> * converted;
-	switch (encoding) {
+	input.seekg (0, input.beg);
+	char c;
+
+	std::cout << trans[0] << ", " << trans[1] << ", " << trans[2] << ";\n";
+
+	switch (encod) {
 		case 1:
-			converted = ConvertFromKoi8ToUTF8 (input);
+			while (input.get(c)) {
+				if (codesKoiToUTF[(unsigned char)c] <= 0xFF) { // однобайтовое == ASCII
+					out.put (c);
+				}
+				else { // двухбайтовые символы
+					for (int i = 0; i < 3; ++i) { // перекодируем букву в нормальную кодировку (которую умеем переводить в UTF8).
+						//std::cout << trans[i] << ";\n";
+						if (WIN_TO_KOI == trans[i]) {
+							c = (char)codesWinToKoi[(unsigned char)c];
+						}
+						else if (KOI_TO_WIN == trans[i]) {
+							c = (char)codesKoiToWin[(unsigned char)c];
+						}
+						else {
+							break;
+						}
+					}
+					out.put ((char)((codesKoiToUTF[(unsigned char)c] & 0xFF00) >> 8)); // первый байт
+					out.put ((char)((codesKoiToUTF[(unsigned char)c] & 0x00FF))); // второй байт
+				}
+			}
 			break;
 		case 2:
-			converted = ConvertFromWin1251ToUTF8 (input);
+			while (input.get (c)) {
+				if (codesWinToUTF[(unsigned char)c] <= 0xFF) { // однобайтовое == ASCII
+					out.put (c);
+				}
+				else { // двухбайтовые символы
+					for (int i = 0; i < 3; ++i) { // перекодируем букву в нормальную кодировку (которую умеем переводить в UTF8).
+						//std::cout << trans[i] << ";\n";
+						if (WIN_TO_KOI == trans[i]) {
+							c = (char)codesWinToKoi[(unsigned char)c];
+						}
+						else if (KOI_TO_WIN == trans[i]) {
+							c = (char)codesKoiToWin[(unsigned char)c];
+						}
+						else {
+							break;
+						}
+					}
+					out.put ((char)((codesWinToUTF[(unsigned char)c] & 0xFF00) >> 8)); // первый байт
+					out.put ((char)((codesWinToUTF[(unsigned char)c] & 0x00FF))); // второй байт
+				}
+			}
 			break;
 		default:
 			return; // кидаться ничем не буду, потому что больно
 	}
-	for (int i = 0; i < converted->size (); ++i) {
-		if ((*converted)[i] <= 0xFF ) { // однобайтовое == ASCII
-			out.put ((char)(*converted)[i]);
-		}
-		else { // двухбайтовые символы
-			out.put ((char)(((*converted)[i] & 0xFF00) >> 8)); // первый байт
-			out.put ((char)(((*converted)[i] & 0x00FF)     )); // второй байт
-		}
-	}
-	delete converted;
 }
