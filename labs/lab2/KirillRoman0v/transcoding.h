@@ -5,512 +5,512 @@ char ToWin1251 (char c) {
   // transcoding cp to win
 
   //1
-  if (c="")
-    code = ;
+  if (c="А")
+    c = "Ђ";
 
     //2
-    if (c="")
-      code = ;
+    if (c="Б")
+      c = "Ѓ";
 
       //3
-      if (c="")
-        code = ;
+      if (c="В")
+        c = "‚";
 
         //4
-        if (c="")
-          code = ;
+        if (c = "Г")
+          c = "ѓ";
   //5
-  if (c="")
-    code= ;
+  if (c = "Д")
+    c = "„";
 
     //6
-    if (c="")
-      code= ;
+    if (c = "Е")
+      c = "…";
 
       //7
-      if (c="")
-        code= ;
+      if (c = "Ж")
+        c = "†";
 
         //8
-        if (c="")
-          code= ;
+        if (c = "З")
+          c = "‡";
 
   //9
-  if (c="")
-    code = ;
+  if (c = "И")
+    c = "€";
 
     //10
-    if (c="")
-      code = ;
+    if (c = "Й")
+      c = "‰";
 
       //11
-      if (c="")
-        code = ;
+      if (c = "К")
+        c = "Љ";
 
         //12
-        if (c="")
-          code = ;
+        if (c = "Л")
+          c = "‹";
 
   //13
-  if (c="")
-    code= ;
+  if (c = "М")
+    c = "Њ";
 
     //14
-    if (c="")
-      code= ;
+    if (c = "Н")
+      c = "Ќ";
 
       //15
-      if (c="")
-        code= ;
+      if (c = "О")
+        c = "Ћ";
 
         //16
-        if (c="")
-          code= ;
+        if (c = "П")
+          c = "Џ";
 
           //17
-          if (c="")
-            code = ;
+          if (c = "Р")
+            c = "ђ";
 
             //18
-            if (c="")
-              code = ;
+            if (c = "С")
+              c = "‘";
 
               //19
-              if (c="")
-                code = ;
+              if (c = "Т")
+                c = "’";
 
                 //20
-                if (c="")
-                  code = ;
+                if (c = "У")
+                  c = "“";
           //21
-          if (c="")
-            code= ;
+          if (c = "Ф")
+            c = "”";
 
             //22
-            if (c="")
-              code= ;
+            if (c = "Х")
+              c = "•";
 
               //23
-              if (c="")
-                code= ;
+              if (c = "Ц")
+                c = "–";
 
                 //24
-                if (c="")
-                  code= ;
+                if (c = "Ч")
+                  c = "—";
 
           //25
-          if (c="")
-            code = ;
+          if (c = "Ш")
+            c = "�";
 
             //26
-            if (c="")
-              code = ;
+            if (c = "Щ")
+              c = "™";
 
               //27
-              if (c="")
-                code = ;
+              if (c = "Ъ")
+                c = "љ";
 
                 //28
-                if (c="")
-                  code = ;
+                if (c = "Ы")
+                  c = "›";
 
           //29
-          if (c="")
-            code= ;
+          if (c = "Ь")
+            c = "њ";
 
             //30
-            if (c="")
-              code= ;
+            if (c = "Э")
+              c = "ќ";
 
               //31
-              if (c="")
-                code= ;
+              if (c = "Ю")
+                c= "ћ";
 
                 //32
-                if (c="")
-                  code= ;
+                if (c = "Я")
+                  c = "џ";
 
                   //33
-                  if (c="")
-                    code = ;
+                  if (c = "а")
+                    c = "Ў";
 
                     //34
-                    if (c="")
-                      code = ;
+                    if (c="б")
+                      c = "ў";
 
                       //35
-                      if (c="")
-                        code = ;
+                      if (c="в")
+                        c = "Ј";
 
                         //36
-                        if (c="")
-                          code = ;
+                        if (c="г")
+                          c = "¤";
                   //37
-                  if (c="")
-                    code= ;
+                  if (c="д")
+                    c = "Ґ";
 
                     //38
-                    if (c="")
-                      code= ;
+                    if (c="е")
+                      c = "¦";
 
                       //39
-                      if (c="")
-                        code= ;
+                      if (c="ж")
+                        c = "§";
 
                         //40
-                        if (c="")
-                          code= ;
+                        if (c="з")
+                          c = "";
 
                   //41
-                  if (c="")
-                    code = ;
+                  if (c="и")
+                    c = "Ё";
 
                     //42
-                    if (c="")
-                      code = ;
+                    if (c="й")
+                      c = "©";
 
                       //43
-                      if (c="")
-                        code = ;
+                      if (c="к")
+                        c = "Є";
 
                         //44
-                        if (c="")
-                          code = ;
+                        if (c="л")
+                          c = "«";
 
                   //45
-                  if (c="")
-                    code= ;
+                  if (c="м")
+                    c = "¬";
 
                     //46
-                    if (c="")
-                      code= ;
+                    if (c="н")
+                      c = " ";
 
                       //47
-                      if (c="")
-                        code= ;
+                      if (c="о")
+                        c = "®";
 
                         //48
-                        if (c="")
-                          code= ;
+                        if (c="п")
+                          c = "Ї";
 
                           //49
                           if (c="")
-                            code = ;
+                            c = "";
 
                             //50
                             if (c="")
-                              code = ;
+                              c = "";
 
                               //51
                               if (c="")
-                                code = ;
+                                c = "";
 
                                 //52
                                 if (c="")
-                                  code = ;
+                                  c = "";
                           //53
                           if (c="")
-                            code= ;
+                            c = "";
 
                             //54
                             if (c="")
-                              code= ;
+                              c = "";
 
                               //55
                               if (c="")
-                                code= ;
+                                c = "";
 
                                 //56
                                 if (c="")
-                                  code= ;
+                                  c = "";
 
                           //57
                           if (c="")
-                            code = ;
+                            c = "";
 
                             //58
                             if (c="")
-                              code = ;
+                              c = "";
 
                               //59
                               if (c="")
-                                code = ;
+                                c = "";
 
                                 //60
                                 if (c="")
-                                  code = ;
+                                  c = "";
 
                           //61
                           if (c="")
-                            code= ;
+                            c = "";
 
                             //62
                             if (c="")
-                              code= ;
+                              c = "";
 
                               //63
                               if (c="")
-                                code= ;
+                                c = "";
 
                                 //64
                                 if (c="")
-                                  code= ;
+                                  c = "";
 
                   //65
                   if (c="")
-                    code = ;
+                    c = "";
 
                     //66
                     if (c="")
-                      code = ;
+                      c = "";
 
                       //67
                       if (c="")
-                        code = ;
+                        c = "";
 
                         //68
                         if (c="")
-                          code = ;
+                          c = "";
 
                   //69
                   if (c="")
-                    code= ;
+                    c = "";
 
                     //70
                     if (c="")
-                      code= ;
+                      c = "";
 
                       //71
                       if (c="")
-                        code= ;
+                        c = "";
 
                         //72
                         if (c="")
-                          code= ;
+                          c = "";
 
                   //73
                   if (c="")
-                    code = ;
+                    c = "";
 
                     //74
                     if (c="")
-                      code = ;
+                      c = "";
 
                       //75
                       if (c="")
-                        code = ;
+                        c = "";
 
                         //76
                         if (c="")
-                          code = ;
+                          c = "";
 
                   //77
                   if (c="")
-                    code= ;
+                    c = "";
 
                     //78
                     if (c="")
-                      code= ;
+                      c = "";
 
                       //79
                       if (c="")
-                        code= ;
+                        c = "";
 
                         //80
                         if (c="")
-                          code= ;
+                          c = "";
 
                           //81
                           if (c="")
-                            code = ;
+                            c = "";
 
                             //82
                             if (c="")
-                              code = ;
+                              c = "";
 
                               //83
                               if (c="")
-                                code = ;
+                                c = "";
 
                         //84
                         if (c="")
-                          code = ;
+                          c = "";
 
                           //85
                           if (c="")
-                            code= ;
+                            c = "";
 
                             //86
                             if (c="")
-                              code= ;
+                              c = "";
 
                               //87
                               if (c="")
-                                code= ;
+                                c = "";
 
                                 //88
                                 if (c="")
-                                  code= ;
+                                  c = "";
 
                                   //89
                                   if (c="")
-                                  code = ;
+                                  c = "";
 
                         //90
                         if (c="")
-                          code = ;
+                          c = "";
 
                           //91
                           if (c="")
-                            code = ;
+                            c = "";
 
                             //92
                             if (c="")
-                              code = ;
+                              c = "";
 
                               //93
                               if (c="")
-                                code= ;
+                                c = "";
 
                         //94
                         if (c="")
-                          code= ;
+                          c = "";
 
                           //95
                           if (c="")
-                            code= ;
+                            c = "";
 
                             //96
-                            if (c="")
-                              code= ;
+                            if (c = "")
+                              c = "";
 
                               //97
-                              if (c="")
-                                code = ;
+                              if (c = "р")
+                                c = "а";
 
                                 //98
-                                if (c="")
-                                  code = ;
+                                if (c = "с")
+                                  c = "б";
 
                                   //99
-                                  if (c="")
-                                    code = ;
+                                  if (c = "т")
+                                    c = "в";
 
                                     //100
-                                    if (c="")
-                                      code = ;
+                                    if (c = "у")
+                                      c = "г";
 
                                       //101
-                                      if (c="")
-                                        code= ;
+                                      if (c = "ф")
+                                        c = "д";
 
                                         //102
-                                        if (c="")
-                                          code= ;
+                                        if (c = "х")
+                                          c = "е";
 
                                           //103
-                                          if (c="")
-                                            code= ;
+                                          if (c = "ц")
+                                            c = "ж";
 
                                             //104
-                                            if (c="")
-                                              code= ;
+                                            if (c = "ч")
+                                              c = "з";
 
                             //105
-                            if (c="")
-                              code = ;
+                            if (c = "ш")
+                              c = "и";
 
                               //106
-                              if (c="")
-                                code = ;
+                              if (c = "щ")
+                                c = "й";
 
                                 //107
-                                if (c="")
-                                  code = ;
+                                if (c = "ъ")
+                                  c = "к";
 
                                   //108
-                                  if (c="")
-                                    code = ;
+                                  if (c = "ы")
+                                    c = "л";
 
                                     //109
-                                    if (c="")
-                                      code= ;
+                                    if (c = "ь")
+                                      c = "м";
 
                                       //110
-                                      if (c="")
-                                        code= ;
+                                      if (c = "э")
+                                        c = "н";
 
                                         //111
-                                        if (c="")
-                                          code= ;
+                                        if (c = "ю")
+                                          c = "о";
 
                                           //112
-                                          if (c="")
-                                            code= ;
+                                          if (c = "я")
+                                            c = "п";
 
                       //113
-                      if (c="")
-                        code = ;
+                      if (c = "Ё")
+                        c = "р";
 
                         //114
-                        if (c="")
-                          code = ;
+                        if (c = "ё")
+                          c = "с";
 
                           //115
-                          if (c="")
-                            code = ;
+                          if (c = "")
+                            c = "т";
 
                             //116
-                            if (c="")
-                              code = ;
+                            if (c = "")
+                              c = "у";
 
                               //117
-                              if (c="")
-                                code= ;
+                              if (c = "")
+                                c = "ф";
 
                                 //118
                                 if (c="")
-                                  code= ;
+                                  c = "х";
 
                                   //119
                                   if (c="")
-                                    code= ;
+                                    c = "ц";
 
                                     //120
                                     if (c="")
-                                      code= ;
+                                      c = "ч";
 
                   //121
                   if (c="")
-                    code = ;
+                    c = "ш";
 
                     //122
                     if (c="")
-                      code = ;
+                      c = "щ";
 
                       //123
                      if (c="")
-                       code = ;
+                       c = "ъ";
 
                        //124
                       if (c="")
-                        code = ;
+                        c = "ы";
 
                         //125
                         if (c="")
-                          code= ;
+                          c = "ь";
 
                           //126
                           if (c="")
-                            code= ;
+                            c = "э";
 
                             //127
                             if (c="")
-                              code= ;
+                              c = "ю";
 
                               //128
                               if (c="")
-                                code= ;
+                                c = "я";
 
 
   return c;
@@ -520,512 +520,512 @@ char ToCp866 (char c) {
   // transcoding win to cp
 
   //1
-  if (c="")
-    code = ;
+  if (c="Ђ")
+    c = "А";
 
     //2
-    if (c="")
-      code = ;
+    if (c="Ѓ")
+      c = "Б";
 
       //3
-      if (c="")
-        code = ;
+      if (c="‚")
+        c = "В";
 
         //4
-        if (c="")
-          code = ;
+        if (c = "ѓ")
+          c = "Г";
   //5
-  if (c="")
-    code= ;
+  if (c="„")
+    c = "Д";
 
     //6
-    if (c="")
-      code= ;
+    if (c = "…")
+      c = "Е";
 
       //7
-      if (c="")
-        code= ;
+      if (c = "†")
+        c = "Ж";
 
         //8
-        if (c="")
-          code= ;
+        if (c = "‡")
+          c = "З";
 
   //9
-  if (c="")
-    code = ;
+  if (c = "€")
+    c = "И";
 
     //10
-    if (c="")
-      code = ;
+    if (c = "‰")
+      c = "Й";
 
       //11
-      if (c="")
-        code = ;
+      if (c = "Љ")
+        c = "К";
 
         //12
-        if (c="")
-          code = ;
+        if (c = "‹")
+          c = "Л";
 
   //13
-  if (c="")
-    code= ;
+  if (c = "Њ")
+    c = "М";
 
     //14
-    if (c="")
-      code= ;
+    if (c = "Ќ")
+      c = "Н";
 
       //15
-      if (c="")
-        code= ;
+      if (c = "Ћ")
+        c = "О";
 
         //16
-        if (c="")
-          code= ;
+        if (c = "Џ")
+          c = "П";
 
           //17
-          if (c="")
-            code = ;
+          if (c = "ђ")
+            c = "Р";
 
             //18
-            if (c="")
-              code = ;
+            if (c = "‘")
+              c = "С";
 
               //19
-              if (c="")
-                code = ;
+              if (c = "’")
+                c = "Т";
 
                 //20
-                if (c="")
-                  code = ;
+                if (c = "“")
+                  c = "У";
           //21
-          if (c="")
-            code= ;
+          if (c = "”")
+            c = "Ф";
 
             //22
-            if (c="")
-              code= ;
+            if (c = "•")
+              c = "Х";
 
               //23
-              if (c="")
-                code= ;
+              if (c = "–")
+                c = "Ц";
 
                 //24
-                if (c="")
-                  code= ;
+                if (c = "—")
+                  c = "Ч";
 
           //25
-          if (c="")
-            code = ;
+          if (c = "�")
+            c = "Ш";
 
             //26
-            if (c="")
-              code = ;
+            if (c = "™")
+              c = "Щ";
 
               //27
-              if (c="")
-                code = ;
+              if (c = "љ")
+                c = "Ъ";
 
                 //28
-                if (c="")
-                  code = ;
+                if (c = "›")
+                  c = "Ы";
 
           //29
-          if (c="")
-            code= ;
+          if (c = "њ")
+            c = "Ь";
 
             //30
-            if (c="")
-              code= ;
+            if (c = "ќ")
+              c = "Э";
 
               //31
-              if (c="")
-                code= ;
+              if (c = "ћ")
+                c = "Ю";
 
                 //32
-                if (c="")
-                  code= ;
+                if (c = "џ")
+                  c = "Я";
 
                   //33
-                  if (c="")
-                    code = ;
+                  if (c = "Ў")
+                    c = "б";
 
                     //34
-                    if (c="")
-                      code = ;
+                    if (c = "ў")
+                      c = "в";
 
                       //35
-                      if (c="")
-                        code = ;
+                      if (c = "Ј")
+                        c = "г";
 
                         //36
-                        if (c="")
-                          code = ;
+                        if (c = "¤")
+                          c = "д";
                   //37
-                  if (c="")
-                    code= ;
+                  if (c = "Ґ")
+                    c = "е";
 
                     //38
-                    if (c="")
-                      code= ;
+                    if (c = "¦")
+                      c = "ж";
 
                       //39
-                      if (c="")
-                        code= ;
+                      if (c = "§")
+                        c = "з";
 
                         //40
-                        if (c="")
-                          code= ;
+                        if (c = "Ё")
+                          c = "и";
 
                   //41
-                  if (c="")
-                    code = ;
+                  if (c = "©")
+                    c = "й";
 
                     //42
-                    if (c="")
-                      code = ;
+                    if (c = "Є")
+                      c = "к";
 
                       //43
-                      if (c="")
-                        code = ;
+                      if (c = "«")
+                        c = "л";
 
                         //44
-                        if (c="")
-                          code = ;
+                        if (c = "¬")
+                          c = "м";
 
                   //45
-                  if (c="")
-                    code= ;
+                  if (c = " ")
+                    c = "н";
 
                     //46
-                    if (c="")
-                      code= ;
+                    if (c = "®")
+                      c = "о";
 
                       //47
-                      if (c="")
-                        code= ;
+                      if (c = "Ї")
+                        c = "п";
 
                         //48
-                        if (c="")
-                          code= ;
+                        if (c = " ")
+                          c = "а";
 
                           //49
                           if (c="")
-                            code = ;
+                            c = "";
 
                             //50
                             if (c="")
-                              code = ;
+                              c = "";
 
                               //51
                               if (c="")
-                                code = ;
+                                c = "";
 
                                 //52
                                 if (c="")
-                                  code = ;
+                                  c = "";
                           //53
                           if (c="")
-                            code= ;
+                            c = "";
 
                             //54
                             if (c="")
-                              code= ;
+                              c = "";
 
                               //55
                               if (c="")
-                                code= ;
+                                c = "";
 
                                 //56
                                 if (c="")
-                                  code= ;
+                                  c = "";
 
                           //57
                           if (c="")
-                            code = ;
+                            c = "";
 
                             //58
                             if (c="")
-                              code = ;
+                              c = "";
 
                               //59
                               if (c="")
-                                code = ;
+                                c = "";
 
                                 //60
                                 if (c="")
-                                  code = ;
+                                  c = "";
 
                           //61
                           if (c="")
-                            code= ;
+                            c = "";
 
                             //62
                             if (c="")
-                              code= ;
+                              c = "";
 
                               //63
                               if (c="")
-                                code= ;
+                                c = "";
 
                                 //64
                                 if (c="")
-                                  code= ;
+                                  c = "";
 
                   //65
-                  if (c="")
-                    code = ;
+                  if (c="А")
+                    c = "";
 
                     //66
-                    if (c="")
-                      code = ;
+                    if (c="Б")
+                      c = "";
 
                       //67
-                      if (c="")
-                        code = ;
+                      if (c="В")
+                        c = "";
 
                         //68
-                        if (c="")
-                          code = ;
+                        if (c="Г")
+                          c = "";
 
                   //69
-                  if (c="")
-                    code= ;
+                  if (c="Д")
+                    c = "";
 
                     //70
-                    if (c="")
-                      code= ;
+                    if (c="Е")
+                      c = "";
 
                       //71
-                      if (c="")
-                        code= ;
+                      if (c="Ж")
+                        c = "";
 
                         //72
-                        if (c="")
-                          code= ;
+                        if (c="З")
+                          c = "";
 
                   //73
-                  if (c="")
-                    code = ;
+                  if (c="И")
+                    c = "";
 
                     //74
-                    if (c="")
-                      code = ;
+                    if (c="Й")
+                      c = "";
 
                       //75
-                      if (c="")
-                        code = ;
+                      if (c="К")
+                        c = "";
 
                         //76
-                        if (c="")
-                          code = ;
+                        if (c="Л")
+                          c = "";
 
                   //77
-                  if (c="")
-                    code= ;
+                  if (c="М")
+                    c = "";
 
                     //78
-                    if (c="")
-                      code= ;
+                    if (c="Н")
+                      c = "";
 
                       //79
-                      if (c="")
-                        code= ;
+                      if (c="О")
+                        c = "";
 
                         //80
-                        if (c="")
-                          code= ;
+                        if (c="П")
+                          c = "";
 
                           //81
-                          if (c="")
-                            code = ;
+                          if (c="Р")
+                            c = "";
 
                             //82
-                            if (c="")
-                              code = ;
+                            if (c="С")
+                              c = "";
 
                               //83
-                              if (c="")
-                                code = ;
+                              if (c="Т")
+                                c = "";
 
                         //84
-                        if (c="")
-                          code = ;
+                        if (c="У")
+                          c = "";
 
                           //85
-                          if (c="")
-                            code= ;
+                          if (c="Ф")
+                            c = "";
 
                             //86
-                            if (c="")
-                              code= ;
+                            if (c="Х")
+                              c = "";
 
                               //87
-                              if (c="")
-                                code= ;
+                              if (c="Ц")
+                                c = "";
 
                                 //88
-                                if (c="")
-                                  code= ;
+                                if (c="Ч")
+                                  c = "";
 
                                   //89
-                                  if (c="")
-                                  code = ;
+                                  if (c="Ш")
+                                  c = "";
 
                         //90
-                        if (c="")
-                          code = ;
+                        if (c="Щ")
+                          c = "";
 
                           //91
-                          if (c="")
-                            code = ;
+                          if (c="Ъ")
+                            c = "";
 
                             //92
-                            if (c="")
-                              code = ;
+                            if (c="Ы")
+                              c = "";
 
                               //93
-                              if (c="")
-                                code= ;
+                              if (c="Ь")
+                                c = "";
 
                         //94
-                        if (c="")
-                          code= ;
+                        if (c="Э")
+                          c = "";
 
                           //95
-                          if (c="")
-                            code= ;
+                          if (c="Ю")
+                            c = "";
 
                             //96
-                            if (c="")
-                              code= ;
+                            if (c="Я")
+                              c = "";
 
                               //97
-                              if (c="")
-                                code = ;
+                              if (c="а")
+                                c = "р";
 
                                 //98
-                                if (c="")
-                                  code = ;
+                                if (c="б")
+                                  c = "с";
 
                                   //99
-                                  if (c="")
-                                    code = ;
+                                  if (c="в")
+                                    c = "т";
 
                                     //100
-                                    if (c="")
-                                      code = ;
+                                    if (c="г")
+                                      c = "у";
 
                                       //101
-                                      if (c="")
-                                        code= ;
+                                      if (c="д")
+                                        c = "ф";
 
                                         //102
-                                        if (c="")
-                                          code= ;
+                                        if (c="е")
+                                          c = "х";
 
                                           //103
-                                          if (c="")
-                                            code= ;
+                                          if (c="ж")
+                                            c = "ц";
 
                                             //104
-                                            if (c="")
-                                              code= ;
+                                            if (c="з")
+                                              c = "ч";
 
                             //105
-                            if (c="")
-                              code = ;
+                            if (c="и")
+                              c = "ш";
 
                               //106
-                              if (c="")
-                                code = ;
+                              if (c="й")
+                                c = "щ";
 
                                 //107
-                                if (c="")
-                                  code = ;
+                                if (c="к")
+                                  c = "ъ";
 
                                   //108
-                                  if (c="")
-                                    code = ;
+                                  if (c="л")
+                                    c = "ы";
 
                                     //109
-                                    if (c="")
-                                      code= ;
+                                    if (c="м")
+                                      c = "ь";
 
                                       //110
-                                      if (c="")
-                                        code= ;
+                                      if (c="н")
+                                        c = "э";
 
                                         //111
-                                        if (c="")
-                                          code= ;
+                                        if (c="о")
+                                          c = "ю";
 
                                           //112
-                                          if (c="")
-                                            code= ;
+                                          if (c="п")
+                                            c = "я";
 
                       //113
-                      if (c="")
-                        code = ;
+                      if (c="р")
+                        c = "Ё";
 
                         //114
-                        if (c="")
-                          code = ;
+                        if (c="с")
+                          c = "ё";
 
                           //115
-                          if (c="")
-                            code = ;
+                          if (c="т")
+                            c = "";
 
                             //116
-                            if (c="")
-                              code = ;
+                            if (c="у")
+                              c = "";
 
                               //117
-                              if (c="")
-                                code= ;
+                              if (c="ф")
+                                c = "";
 
                                 //118
-                                if (c="")
-                                  code= ;
+                                if (c="х")
+                                    c = "";
 
                                   //119
-                                  if (c="")
-                                    code= ;
+                                  if (c="ц")
+                                      c = "";
 
                                     //120
-                                    if (c="")
-                                      code= ;
+                                    if (c="ч")
+                                        c = "";
 
                   //121
-                  if (c="")
-                    code = ;
+                  if (c="ш")
+                    c = "";
 
                     //122
-                    if (c="")
-                      code = ;
+                    if (c="щ")
+                        c = "";
 
                       //123
-                     if (c="")
-                       code = ;
+                     if (c="ъ")
+                         c = "";
 
                        //124
-                      if (c="")
-                        code = ;
+                      if (c="ы")
+                          c = "";
 
                         //125
-                        if (c="")
-                          code= ;
+                        if (c="ь")
+                            c = "";
 
                           //126
-                          if (c="")
-                            code= ;
+                          if (c="э")
+                              c = "";
 
                             //127
-                            if (c="")
-                              code= ;
+                            if (c="ю")
+                                c = "";
 
                               //128
-                              if (c="")
-                                code= ;
+                              if (c="я")
+                                  c = "";
 
   return c;
 }
@@ -1033,512 +1033,512 @@ char ToCp866 (char c) {
 char WinToKoi8 (char c) {
 
   //1
-  if (c="")
-    code = ;
+  if (c="Ђ")
+    c = "";
 
     //2
-    if (c="")
-      code = ;
+    if (c="Ѓ")
+      c = "";
 
       //3
-      if (c="")
-        code = ;
+      if (c="‚")
+        c = "";
 
         //4
-        if (c="")
-          code = ;
+        if (c="ѓ")
+          c = "";
   //5
-  if (c="")
-    code= ;
+  if (c="„")
+    c = "";
 
     //6
-    if (c="")
-      code= ;
+    if (c="…")
+      c = "";
 
       //7
-      if (c="")
-        code= ;
+      if (c="†")
+        c = "";
 
         //8
-        if (c="")
-          code= ;
+        if (c="‡")
+          c = "";
 
   //9
-  if (c="")
-    code = ;
+  if (c="€")
+    c = "";
 
     //10
-    if (c="")
-      code = ;
+    if (c="‰")
+      c = "";
 
       //11
-      if (c="")
-        code = ;
+      if (c="Љ")
+        c = "";
 
         //12
-        if (c="")
-          code = ;
+        if (c="‹")
+          c = "";
 
   //13
-  if (c="")
-    code= ;
+  if (c="Њ")
+    c = "";
 
     //14
-    if (c="")
-      code= ;
+    if (c="Ќ")
+      c = "";
 
       //15
-      if (c="")
-        code= ;
+      if (c="Ћ")
+        c = "";
 
         //16
-        if (c="")
-          code= ;
+        if (c="Џ")
+          c = "";
 
           //17
-          if (c="")
-            code = ;
+          if (c="ђ")
+            c = "";
 
             //18
-            if (c="")
-              code = ;
+            if (c="‘")
+              c = "";
 
               //19
-              if (c="")
-                code = ;
+              if (c="’")
+                c = "";
 
                 //20
-                if (c="")
-                  code = ;
+                if (c="“")
+                  c = "";
           //21
-          if (c="")
-            code= ;
+          if (c="”")
+            c = "";
 
             //22
-            if (c="")
-              code= ;
+            if (c="•")
+              c = "";
 
               //23
-              if (c="")
-                code= ;
+              if (c="–")
+                c = "";
 
                 //24
-                if (c="")
-                  code= ;
+                if (c="—")
+                  c = "";
 
           //25
-          if (c="")
-            code = ;
+          if (c="�")
+            c = "";
 
             //26
-            if (c="")
-              code = ;
+            if (c="™")
+              c = "";
 
               //27
-              if (c="")
-                code = ;
+              if (c="љ")
+                c = "";
 
                 //28
-                if (c="")
-                  code = ;
+                if (c="›")
+                  c = "";
 
           //29
-          if (c="")
-            code= ;
+          if (c="њ")
+            c = "";
 
             //30
-            if (c="")
-              code= ;
+            if (c="ќ")
+              c = "";
 
               //31
-              if (c="")
-                code= ;
+              if (c="ћ")
+                c = "";
 
                 //32
-                if (c="")
-                  code= ;
+                if (c="џ")
+                  c = "";
 
                   //33
-                  if (c="")
-                    code = ;
+                  if (c=" ")
+                    c = "";
 
                     //34
-                    if (c="")
-                      code = ;
+                    if (c="Ў")
+                      c = "";
 
                       //35
-                      if (c="")
-                        code = ;
+                      if (c="ў")
+                        c = "";
 
                         //36
-                        if (c="")
-                          code = ;
+                        if (c="Ј")
+                          c = "";
                   //37
-                  if (c="")
-                    code= ;
+                  if (c="¤")
+                    c = "";
 
                     //38
-                    if (c="")
-                      code= ;
+                    if (c="Ґ")
+                      c = "";
 
                       //39
-                      if (c="")
-                        code= ;
+                      if (c="¦")
+                        c = "";
 
                         //40
-                        if (c="")
-                          code= ;
+                        if (c="§")
+                          c = "";
 
                   //41
-                  if (c="")
-                    code = ;
+                  if (c="Ё")
+                    c = "";
 
                     //42
-                    if (c="")
-                      code = ;
+                    if (c="©")
+                      c = "";
 
                       //43
-                      if (c="")
-                        code = ;
+                      if (c="Є")
+                        c = "";
 
                         //44
-                        if (c="")
-                          code = ;
+                        if (c="«")
+                          c = "";
 
                   //45
-                  if (c="")
-                    code= ;
+                  if (c="¬")
+                    c = "";
 
                     //46
-                    if (c="")
-                      code= ;
+                    if (c=" ")
+                      c = "";
 
                       //47
-                      if (c="")
-                        code= ;
+                      if (c="®")
+                        c = "";
 
                         //48
-                        if (c="")
-                          code= ;
+                        if (c="Ї")
+                          c = "";
 
                           //49
                           if (c="")
-                            code = ;
+                            c = "";
 
                             //50
                             if (c="")
-                              code = ;
+                              c = "";
 
                               //51
                               if (c="")
-                                code = ;
+                                c = "";
 
                                 //52
                                 if (c="")
-                                  code = ;
+                                  c = "";
                           //53
                           if (c="")
-                            code= ;
+                            c = "";
 
                             //54
                             if (c="")
-                              code= ;
+                              c = "";
 
                               //55
                               if (c="")
-                                code= ;
+                                c = "";
 
                                 //56
                                 if (c="")
-                                  code= ;
+                                  c = "";
 
                           //57
                           if (c="")
-                            code = ;
+                            c = "";
 
                             //58
                             if (c="")
-                              code = ;
+                              c = "";
 
                               //59
                               if (c="")
-                                code = ;
+                                c = "";
 
                                 //60
                                 if (c="")
-                                  code = ;
+                                  c = "";
 
                           //61
                           if (c="")
-                            code= ;
+                            c = "";
 
                             //62
                             if (c="")
-                              code= ;
+                              c = "";
 
                               //63
                               if (c="")
-                                code= ;
+                                c = "";
 
                                 //64
                                 if (c="")
-                                  code= ;
+                                  c = "";
 
                   //65
-                  if (c="")
-                    code = ;
+                  if (c="А")
+                    c = "";
 
                     //66
-                    if (c="")
-                      code = ;
+                    if (c="Б")
+                      c = "";
 
                       //67
-                      if (c="")
-                        code = ;
+                      if (c="В")
+                        c = "";
 
                         //68
-                        if (c="")
-                          code = ;
+                        if (c="Г")
+                          c = "";
 
                   //69
-                  if (c="")
-                    code= ;
+                  if (c="Д")
+                    c = "";
 
                     //70
-                    if (c="")
-                      code= ;
+                    if (c="Е")
+                      c = "";
 
                       //71
-                      if (c="")
-                        code= ;
+                      if (c="Ж")
+                        c = "";
 
                         //72
-                        if (c="")
-                          code= ;
+                        if (c="З")
+                          c = "";
 
                   //73
-                  if (c="")
-                    code = ;
+                  if (c="И")
+                    c = "";
 
                     //74
-                    if (c="")
-                      code = ;
+                    if (c="Й")
+                      c = "";
 
                       //75
-                      if (c="")
-                        code = ;
+                      if (c="К")
+                        c = "";
 
                         //76
-                        if (c="")
-                          code = ;
+                        if (c="Л")
+                          c = "";
 
                   //77
-                  if (c="")
-                    code= ;
+                  if (c="М")
+                    c = "";
 
                     //78
-                    if (c="")
-                      code= ;
+                    if (c="Н")
+                      c = "";
 
                       //79
-                      if (c="")
-                        code= ;
+                      if (c="О")
+                        c = "";
 
                         //80
-                        if (c="")
-                          code= ;
+                        if (c="П")
+                          c = "";
 
                           //81
-                          if (c="")
-                            code = ;
+                          if (c="Р")
+                            c = "";
 
                             //82
-                            if (c="")
-                              code = ;
+                            if (c="С")
+                              c = "";
 
                               //83
-                              if (c="")
-                                code = ;
+                              if (c="Т")
+                                c = "";
 
                         //84
-                        if (c="")
-                          code = ;
+                        if (c="У")
+                          c = "";
 
                           //85
-                          if (c="")
-                            code= ;
+                          if (c="Ф")
+                            c = "";
 
                             //86
-                            if (c="")
-                              code= ;
+                            if (c="Х")
+                              c = "";
 
                               //87
-                              if (c="")
-                                code= ;
+                              if (c="Ц")
+                                c = "";
 
                                 //88
-                                if (c="")
-                                  code= ;
+                                if (c="Ч")
+                                  c = "";
 
                                   //89
-                                  if (c="")
-                                  code = ;
+                                  if (c="Ш")
+                                  c = "";
 
                         //90
-                        if (c="")
-                          code = ;
+                        if (c="Щ")
+                          c = "";
 
                           //91
-                          if (c="")
-                            code = ;
+                          if (c="Ъ")
+                            c = "";
 
                             //92
-                            if (c="")
-                              code = ;
+                            if (c="Ы")
+                              c = "";
 
                               //93
-                              if (c="")
-                                code= ;
+                              if (c="Ь")
+                                c = "";
 
                         //94
-                        if (c="")
-                          code= ;
+                        if (c="Э")
+                          c = "";
 
                           //95
-                          if (c="")
-                            code= ;
+                          if (c="Ю")
+                            c = "";
 
                             //96
-                            if (c="")
-                              code= ;
+                            if (c="Я")
+                              c = "";
 
                               //97
-                              if (c="")
-                                code = ;
+                              if (c="а")
+                                c = "";
 
                                 //98
-                                if (c="")
-                                  code = ;
+                                if (c="б")
+                                  c = "";
 
                                   //99
-                                  if (c="")
-                                    code = ;
+                                  if (c="в")
+                                    c = "";
 
                                     //100
-                                    if (c="")
-                                      code = ;
+                                    if (c="г")
+                                      c = "";
 
                                       //101
-                                      if (c="")
-                                        code= ;
+                                      if (c="д")
+                                        c = "";
 
                                         //102
-                                        if (c="")
-                                          code= ;
+                                        if (c="е")
+                                          c = "";
 
                                           //103
-                                          if (c="")
-                                            code= ;
+                                          if (c="ж")
+                                            c = "";
 
                                             //104
-                                            if (c="")
-                                              code= ;
+                                            if (c="з")
+                                              c = "";
 
                             //105
-                            if (c="")
-                              code = ;
+                            if (c="и")
+                              c = "";
 
                               //106
-                              if (c="")
-                                code = ;
+                              if (c="й")
+                                c = "";
 
                                 //107
-                                if (c="")
-                                  code = ;
+                                if (c="к")
+                                  c = "";
 
                                   //108
-                                  if (c="")
-                                    code = ;
+                                  if (c="л")
+                                    c = "";
 
                                     //109
-                                    if (c="")
-                                      code= ;
+                                    if (c="м")
+                                      c = "";
 
                                       //110
-                                      if (c="")
-                                        code= ;
+                                      if (c="н")
+                                        c = "";
 
                                         //111
-                                        if (c="")
-                                          code= ;
+                                        if (c="о")
+                                          c = "";
 
                                           //112
-                                          if (c="")
-                                            code= ;
+                                          if (c="п")
+                                            c = "";
 
                       //113
-                      if (c="")
-                        code = ;
+                      if (c="р")
+                        c = "";
 
                         //114
-                        if (c="")
-                          code = ;
+                        if (c="с")
+                          c = "";
 
                           //115
-                          if (c="")
-                            code = ;
+                          if (c="т")
+                            c = "";
 
                             //116
-                            if (c="")
-                              code = ;
+                            if (c="у")
+                              c = "";
 
                               //117
-                              if (c="")
-                                code= ;
+                              if (c="ф")
+                                c = "";
 
                                 //118
-                                if (c="")
-                                  code= ;
+                                if (c="х")
+                                  c = "";
 
                                   //119
-                                  if (c="")
-                                    code= ;
+                                  if (c="ц")
+                                    c = "";
 
                                     //120
-                                    if (c="")
-                                      code= ;
+                                    if (c="ч")
+                                      c = "";
 
                   //121
-                  if (c="")
-                    code = ;
+                  if (c="ш")
+                    c = "";
 
                     //122
-                    if (c="")
-                      code = ;
+                    if (c="щ")
+                      c = "";
 
                       //123
-                     if (c="")
-                       code = ;
+                     if (c="ъ")
+                       c = "";
 
                        //124
-                      if (c="")
-                        code = ;
+                      if (c="ы")
+                        c = "";
 
                         //125
-                        if (c="")
-                          code= ;
+                        if (c="ь")
+                          c = "";
 
                           //126
-                          if (c="")
-                            code= ;
+                          if (c="э")
+                            c = "";
 
                             //127
-                            if (c="")
-                              code= ;
+                            if (c="ю")
+                              c = "";
 
                               //128
-                              if (c="")
-                                code= ;
+                              if (c="я")
+                                c = "";
 
   return c;
 }
