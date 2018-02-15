@@ -310,15 +310,15 @@ std::vector<unsigned char> * ConvertFromWin1251ToKoi8 (const std::vector<unsigne
 encoding IdentifyEncoding (const std::vector<unsigned char> input) { // 0 - unknown, 1 - koi8, 2 - win1251
 	unsigned char mfs = most_frequent_symbol (input);
 	if ('о' == koi8[mfs]) {
-		std::cout << "koi\n";
+		//std::cout << "koi\n";
 		return KOI;
 	}
 	else if ('о' == win1251[mfs]) {
-		std::cout << "win\n";
+		//std::cout << "win\n";
 		return WIN;		
 	}
 	else {
-		std::cout << "unknown\n";
+		//std::cout << "unknown\n";
 		return UNKNOWN;		
 	}	
 }
@@ -350,7 +350,7 @@ void convert_to_UTF_and_print_into_file (std::ifstream & input, std::ofstream & 
 	input.seekg (0, input.beg);
 	char c;
 
-	std::cout << trans[0] << ", " << trans[1] << ", " << trans[2] << ";\n";
+	//std::cout << trans[0] << ", " << trans[1] << ", " << trans[2] << ";\n";
 
 	switch (encod) {
 		case 1:
