@@ -344,13 +344,20 @@ int identify_encoding(unsigned char* text)
     int i, j;
     double koi8_val = 0;
     double win1251_val = 0;
-    for(i=0; i<strlen(text); ++i) {
-        for(j=0; j<64; j++) {
-            if(text[i] == koi8_key[j]) {
-                koi8_val += koi8_dispers[j];
-            }
-            else if(text[i] == win1251_key[j]) {
-                win1251_val += win1251_dispers[j];
+    for(i=0; i<strlen(text); ++i)
+    {
+        if(text[i] > 190)
+        {
+            for(j=0; j<64; ++j)
+            {
+                if(text[i] == koi8_key[j])
+                {
+                    koi8_val += koi8_dispers[j];
+                }
+                else if(text[i] == win1251_key[j])
+                {
+                    win1251_val += win1251_dispers[j];
+                }
             }
         }
     }
@@ -364,16 +371,19 @@ void koi8_to_win1251(unsigned char* koi8, unsigned char* win1251)
     int i, j;
     for(i=0; i<strlen(koi8); ++i)
     {
-        for(j=0; j<64; ++j)
+        if(koi8[i] > 190)
         {
-            if(koi8[i] == koi8_key[j])
+            for(j=0; j<64; ++j)
             {
-                win1251[i] = win1251_key[j];
-                break;
+                if(koi8[i] == koi8_key[j])
+                {
+                    win1251[i] = win1251_key[j];
+                    break;
+                }
             }
-            else {
-                win1251[i] = koi8[i];
-            }
+        }
+        else {
+            win1251[i] = koi8[i];
         }
     }
 }
@@ -383,16 +393,19 @@ void win1251_to_koi8(unsigned char* win1251, unsigned char* koi8)
     int i, j;
     for(i=0; i<strlen(win1251); ++i)
     {
-        for(j=0; j<64; ++j)
+        if(win1251[i] > 190)
         {
-            if(win1251[i] == win1251_key[j])
+            for(j=0; j<64; ++j)
             {
-                koi8[i] = koi8_key[j];
-                break;
+                if(win1251[i] == win1251_key[j])
+                {
+                    koi8[i] = koi8_key[j];
+                    break;
+                }
             }
-            else {
-                koi8[i] = win1251[i];
-            }
+        }
+        else {
+            koi8[i] = win1251[i];
         }
     }
 }
@@ -402,17 +415,20 @@ void win1251_to_utf8(unsigned char* win1251, unsigned int **utf8)
     int i, j;
     for(i=0; i<strlen(win1251); ++i)
     {
-        for(j=0; j<64; ++j)
+        if(win1251[i] > 190)
         {
-            if(win1251[i] == win1251_key[j])
+            for(j=0; j<64; ++j)
             {
-                utf8[i][0] = utf8_key[j][0];
-                utf8[i][1] = utf8_key[j][1];
-                break;
+                if(win1251[i] == win1251_key[j])
+                {
+                    utf8[i][0] = utf8_key[j][0];
+                    utf8[i][1] = utf8_key[j][1];
+                    break;
+                }
             }
-            else {
-                utf8[i][0] = win1251[i];
-            }
+        }
+        else {
+            utf8[i][0] = win1251[i];
         }
     }
 }
@@ -422,18 +438,20 @@ void koi8_to_utf8(unsigned char* koi8, unsigned int **utf8)
     int i, j;
     for(i=0; i<strlen(koi8); ++i)
     {
-        for(j=0; j<64; ++j)
+        if(koi8[i] > 190)
         {
-            if(koi8[i] == koi8_key[j])
+            for(j=0; j<64; ++j)
             {
-                utf8[i][0] = utf8_key[j][0];
-                utf8[i][1] = utf8_key[j][1];
-                break;
+                if(koi8[i] == koi8_key[j])
+                {
+                    utf8[i][0] = utf8_key[j][0];
+                    utf8[i][1] = utf8_key[j][1];
+                    break;
+                }
             }
-            else {
-                utf8[i][1] = koi8[i];
-                utf8[i][0] = '.';
-            }
+        }
+        else {
+            utf8[i][0] = koi8[i];
         }
     }
 }
@@ -452,7 +470,6 @@ int decode(unsigned char* source, unsigned int** utf8, int deep)
         return 1;
     }
     int encW = encK;
-
     if(deep > 3) return 0;
     int lenOfText = strlen(source);
     unsigned char* koi = (unsigned char*)malloc(sizeof(unsigned char)*lenOfText);
@@ -502,38 +519,42 @@ int main(int argc, char* argv[])
     else {
         printf("Enter input file: ");
         scanf("%s", inputFile);
+        strcpy(inputFile, "text.txt");
         printf("Default output file is <out.txt>\n");
         strcpy(outFile, "out.txt");
     }
 
-    unsigned char text[50000];
+    unsigned char text[5000];
     FILE *ftxt = fopen(inputFile, "r");
     FILE *out = fopen(outFile, "w");
-    int p = 0;
-    while(!feof(ftxt)) {
-        text[p] = getc(ftxt);
-        ++p;
-    }
     int i;
-    int lenOfText = strlen(text);
-
-    unsigned int **utf = (unsigned int**)malloc(sizeof(unsigned int*)*lenOfText);
-    for(i=0; i<lenOfText; i++)
+    unsigned int **utf = (unsigned int**)malloc(sizeof(unsigned int*)*sizeof(text));
+    for(i=0; i<sizeof(text); i++)
     {
         utf[i] = (unsigned int*)malloc(sizeof(unsigned int)*2);
     }
-
-    int deep = 0;
-    if(decode(text, utf, deep))
-    {
-        for(i=0; i<lenOfText; ++i)
+    int p;
+    while(!feof(ftxt)) {
+        for(p=0; p<sizeof(text)-1; ++p)
         {
-            printf("%c%c", utf[i][0], utf[i][1]);
-            fputc(utf[i][0], out);
-            fputc(utf[i][1], out);
+            if(feof(ftxt)) break;
+            text[p] = getc(ftxt);
         }
-    }
-    else {
-        perror("Error! Unrecognizable encoding");
+
+        int lenOfText = strlen(text);
+
+        int deep = 0;
+        if(decode(text, utf, deep))
+        {
+            for(i=0; i<lenOfText; ++i)
+            {
+                printf("%c%c", utf[i][0], utf[i][1]);
+                fputc(utf[i][0], out);
+                fputc(utf[i][1], out);
+            }
+        }
+        else {
+            perror("Error! Unrecognizable encoding");
+        }
     }
 }
