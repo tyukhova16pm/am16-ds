@@ -4,7 +4,8 @@
 
 int main() {
 
-  FILE *f = fopen("source.txt", "r");
+  FILE *f;
+  f = fopen("source.txt", "r");
 
   char c;
 
@@ -20,7 +21,6 @@ int main() {
   char *winCpCp1, *winCpWin1, *cpWinWin1, *cpWinCp1;
   char *winWinCp1, *winWinWin1, *cpCpWin1, *cpCpCp1;
 
-  char c;
   if (f!=NULL) {
 
     printf ("ERROR file is not opened!\n");
@@ -66,10 +66,10 @@ int main() {
 
     // открываем файл-ресурс для чтения заново
 
-    *f = fopen("source.txt", "r");
+    f = fopen("source.txt", "r");
     for (i=0; i<n; i++) {
 
-      fscanf("%c", c);
+      fscanf("%c", &c);
       source[i]=c;
 
       win[i] = ToWin1251(source[i]);
@@ -77,17 +77,17 @@ int main() {
 
       winCp[i] = ToCp866(win[i]);
       cpWin[i] = ToWin1251(cp[i]);
-      winWin = ToWin(win[i]);
-      cpCp = ToCp(cp[i]);
+      winWin[i] = ToWin1251(win[i]);
+      cpCp[i] = ToCp866(cp[i]);
 
       winCpCp[i] = ToCp866(winCp[i]);
       winCpWin[i] = ToWin1251(winCp[i]);
       cpWinWin[i] = ToWin1251(cpWin[i]);
       cpWinCp[i] = ToCp866(cpWin[i]);
-      winWinCp[i] = ToCp(winWin[i]);
-      winWinWin[i] = ToWin(winWin[i]);
-      cpCpWin[i] = ToWin(cpCp[i]);
-      cpCpCp[i] = ToCp(cpCp[i]);
+      winWinCp[i] = ToCp866(winWin[i]);
+      winWinWin[i] = ToWin1251(winWin[i]);
+      cpCpWin[i] = ToWin1251(cpCp[i]);
+      cpCpCp[i] = ToCp866(cpCp[i]);
 
       winCpCp1[i] = CpToKoi8(winCpCp[i]);
       winCpWin1[i] = CpToKoi8(winCpWin[i]);
@@ -134,7 +134,7 @@ int main() {
     free(winCp);
     free(cp);
     free(win);
-    fclosef(f);
+    fclose(f);
 
     // Имеем раскодированные массивы
     // Осталось найти осмысленный текст среди них и вывести на экран
@@ -143,10 +143,10 @@ int main() {
 
     // 1
 
-    if (SearchForMeaning(*winWinWin, n)){
+    if (SearchForMeaning(winWinWin, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        win[i] = ToUtf8(win[i]);
+        win[i] = Koi8ToUtf8(win[i]);
         printf("%c", win[i]);
       }
     }
@@ -154,10 +154,10 @@ int main() {
 
     // 2
 
-    if (SearchForMeaning(*cpCpCp, n)){
+    if (SearchForMeaning(cpCpCp, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        cp[i] = ToUtf8(cp[i]);
+        cp[i] = Koi8ToUtf8(cp[i]);
         printf("%c", cp[i]);
       }
     }
@@ -165,10 +165,10 @@ int main() {
 
     // 3
 
-    if (SearchForMeaning(*winWinCp, n)){
+    if (SearchForMeaning(winWinCp, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        winCp[i] = ToUtf8(winCp[i]);
+        winCp[i] = Koi8ToUtf8(winCp[i]);
         printf("%c", winCp[i]);
       }
     }
@@ -176,10 +176,10 @@ int main() {
 
     // 4
 
-    if (SearchForMeaning(*cpCpWin, n)){
+    if (SearchForMeaning(cpCpWin, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        cpWin[i] = ToUtf8(cpWin[i]);
+        cpWin[i] = Koi8ToUtf8(cpWin[i]);
         printf("%c", cpWin[i]);
       }
     }
@@ -187,10 +187,10 @@ int main() {
 
     // 5
 
-    if (SearchForMeaning(*cpWinWin, n)){
+    if (SearchForMeaning(cpWinWin, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        win[i] = ToUtf8(win[i]);
+        win[i] = Koi8ToUtf8(win[i]);
         printf("%c", win[i]);
       }
     }
@@ -198,10 +198,10 @@ int main() {
 
     // 6
 
-    if (SearchForMeaning(*cpWinCp, n)){
+    if (SearchForMeaning(cpWinCp, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        cpWinCp[i] = ToUtf8(cpWinCp[i]);
+        cpWinCp[i] = Koi8ToUtf8(cpWinCp[i]);
         printf("%c", cpWinCp[i]);
       }
     }
@@ -209,10 +209,10 @@ int main() {
 
     // 7
 
-    if (SearchForMeaning(*winCpCp, n)){
+    if (SearchForMeaning(winCpCp, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        cp[i] = ToUtf8(cp[i]);
+        cp[i] = Koi8ToUtf8(cp[i]);
         printf("%c", cp[i]);
       }
     }
@@ -220,10 +220,10 @@ int main() {
 
     // 8
 
-    if (SearchForMeaning(*winCpWin, n)){
+    if (SearchForMeaning(winCpWin, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        cp[i] = ToUtf8(cp[i]);
+        cp[i] = Koi8ToUtf8(cp[i]);
         printf("%c", cp[i]);
       }
     }
@@ -233,10 +233,10 @@ int main() {
 
     // 1
 
-    if (SearchForMeaning(*winWinWin1, n)){
+    if (SearchForMeaning(winWinWin1, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        winWinWin1[i] = ToUtf8(winWinWin1[i]);
+        winWinWin1[i] = Koi8ToUtf8(winWinWin1[i]);
         printf("%c", winWinWin1[i]);
       }
     }
@@ -244,10 +244,10 @@ int main() {
 
     // 2
 
-    if (SearchForMeaning(*cpCpCp1, n)){
+    if (SearchForMeaning(cpCpCp1, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        cpCpCp1[i] = ToUtf8(cpCpCp1[i]);
+        cpCpCp1[i] = Koi8ToUtf8(cpCpCp1[i]);
         printf("%c", cpCpCp1[i]);
       }
     }
@@ -255,10 +255,10 @@ int main() {
 
     // 3
 
-    if (SearchForMeaning(*winWinCp1, n)){
+    if (SearchForMeaning(winWinCp1, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        winWinCp1[i] = ToUtf8(winWinCp1[i]);
+        winWinCp1[i] = Koi8ToUtf8(winWinCp1[i]);
         printf("%c", winWinCp1[i]);
       }
     }
@@ -266,10 +266,10 @@ int main() {
 
     // 4
 
-    if (SearchForMeaning(*cpCpWin1, n)){
+    if (SearchForMeaning(cpCpWin1, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        cpCpWin1[i] = ToUtf8(cpCpWin1[i]);
+        cpCpWin1[i] = Koi8ToUtf8(cpCpWin1[i]);
         printf("%c", cpCpWin1[i]);
       }
     }
@@ -277,10 +277,10 @@ int main() {
 
     // 5
 
-    if (SearchForMeaning(*cpWinWin1, n)){
+    if (SearchForMeaning(cpWinWin1, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        cpWinWin1[i] = ToUtf8(cpWinWin1[i]);
+        cpWinWin1[i] = Koi8ToUtf8(cpWinWin1[i]);
         printf("%c", cpWinWin1[i]);
       }
     }
@@ -288,10 +288,10 @@ int main() {
 
     // 6
 
-    if (SearchForMeaning(*cpWinCp1, n)){
+    if (SearchForMeaning(cpWinCp1, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        cpWinCp1[i] = ToUtf8(cpWinCp1[i]);
+        cpWinCp1[i] = Koi8ToUtf8(cpWinCp1[i]);
         printf("%c", cpWinCp1[i]);
       }
     }
@@ -299,10 +299,10 @@ int main() {
 
     // 7
 
-    if (SearchForMeaning(*winCpCp1, n)){
+    if (SearchForMeaning(winCpCp1, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        winCpCp1[i] = ToUtf8(winCpCp1[i]);
+        winCpCp1[i] = Koi8ToUtf8(winCpCp1[i]);
         printf("%c", winCpCp1[i]);
       }
     }
@@ -310,10 +310,10 @@ int main() {
 
     // 8
 
-    if (SearchForMeaning(*winCpWin1, n)){
+    if (SearchForMeaning(winCpWin1, n)){
       printf("\n");
       for (i=0; i<n; i++){
-        winCpWin1[i] = ToUtf8(wnCpWin1[i]);
+        winCpWin1[i] = Koi8ToUtf8(winCpWin1[i]);
         printf("%c", winCpWin1[i]);
       }
     }
