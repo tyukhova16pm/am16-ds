@@ -177,12 +177,10 @@ int main(int argc, char* argv[])
             text[p] = getc(ftxt);
         }
 
-        int lenOfText = strlen(text);
-
         int deep = 0;
         if(decode(text, utf, deep))
         {
-            for(i=0; i<lenOfText; ++i)
+            for(i=0; i<p-1; ++i)
             {
                 printf("%c%c", utf[i][0], utf[i][1]);
                 fputc(utf[i][0], out);
