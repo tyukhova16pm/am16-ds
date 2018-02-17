@@ -42,7 +42,7 @@ template <typename t>
 t stack<t>::pop()
 {
    if (size == 0)
-        return false; 
+        return 0; 
     return stackPtr[--size] ;  
 }
 
