@@ -176,7 +176,7 @@ int decode(unsigned char* input_text, unsigned int** utf, int complexity)
 int main()
 {	
 	int i, j, complexity;	
-	unsigned char unk_text[5000];
+	unsigned char unk_text[1000];
 	unsigned int **utf = (unsigned int**)malloc(sizeof(unsigned int*)*sizeof(unk_text));
 	FILE *in = fopen("in.txt", "r");
 	FILE *out = fopen("out.txt", "w");
@@ -190,6 +190,10 @@ int main()
 		{
 			if(feof(in))
 			{
+				for(j; j<sizeof(unk_text)-1; ++j)
+				{
+					unk_text[j]='\0';
+				} 
 				break;
 			}
 			unk_text[j] = getc(in);
