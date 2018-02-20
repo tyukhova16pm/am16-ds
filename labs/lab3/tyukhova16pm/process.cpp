@@ -1,6 +1,6 @@
 #include "stack.h"
 
-//Actually stack&queue working
+//Actually stack
 string Replacement(string term)
 {
   int T =term.length();
