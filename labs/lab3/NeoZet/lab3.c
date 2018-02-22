@@ -17,5 +17,6 @@ int main(int argc, char const *argv[])
 	else {
 		int s = queue->size;
 		printf("\nRESULT: %d\n", calculate(queue));
-	}	
+	}
+	free(queue);
 }
