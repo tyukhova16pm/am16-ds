@@ -143,6 +143,6 @@ int main() {
     else return 0;
     close(in);
 
-    decryptor(arr[1000]);
+    decryptor(arr[]);
     return 1;
 }
