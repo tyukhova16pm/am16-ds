@@ -62,7 +62,8 @@ string toPostfix(string infix)
     stek<char> postf(n);
     for(int i = 0; i < n; i++)
     {
-        if(infix[i] == ' ') {
+        if(infix[i] == ' ')
+        {
             continue;
         }
         switch(infix[i])
@@ -114,7 +115,8 @@ string toPostfix(string infix)
     return postfix;
 }
 
-void calc(string in) {
+void calc(string in)
+{
     int n = in.length();
     stek<float> st(n);
     float res = 0;
@@ -123,9 +125,11 @@ void calc(string in) {
     int StopFlag = 0;
     float num1 = 0;
     float num2 = 0;
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i)
+    {
 
-        if(IsOperator(in[i])){
+        if(IsOperator(in[i]))
+        {
             switch(in[i])
             {
                 case '+':
@@ -175,19 +179,25 @@ void calc(string in) {
                 break;
             }
         }
-        else if(IsNumber(in[i])) {
+        else if(IsNumber(in[i]))
+        {
             int j;
-            for(j=0; ;j++) {
-                if(in[i+j] == '.') {
+            for(j=0; ;j++)
+            {
+                if(in[i+j] == '.') 
+                {
                     StopFlag = 1;
                     continue;
                 }
-                if(IsNumber(in[i+j])) {
-                    if(!StopFlag) {
+                if(IsNumber(in[i+j]))
+                {
+                    if(!StopFlag)
+                    {
                         num *= 10;
                         num += (float)(in[i+j] - '0');
                     }
-                    else {
+                    else
+                    {
                         num += (in[i+j]-'0')/gr;
                         num *= 10;
                     }
@@ -196,13 +206,14 @@ void calc(string in) {
              }
              i += j;
              st.push(num);
-        }cout << in[i]<< endl <<res<<endl;
+        }
     }
 
     cout << res << endl;
 }
 
-int main() {
+int main()
+{
     string in;
     cout << "Vvedite primer\n";
     getline(cin, in);
