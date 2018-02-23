@@ -21,9 +21,7 @@ int priority(char symbol) {
 
 int most_priority(char symbol1, char symbol2)
 {
-    int s1 = priority(symbol1);
-    int s2 = priority(symbol2);
-    return s1 >= s2 ? true: false;
+    return priority(symbol1) >= priority(symbol2) ? true: false;
 }
 
 //Строим анализатор входящего выражения и переводим его в postfix-версию
