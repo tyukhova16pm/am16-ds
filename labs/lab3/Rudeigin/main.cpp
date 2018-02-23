@@ -19,7 +19,7 @@ int priority(char symbol) {
     return prior;
 }
 
-int most_priority(char symbol1, char symbol2)
+bool most_priority(char symbol1, char symbol2)
 {
     return priority(symbol1) >= priority(symbol2) ? true: false;
 }
