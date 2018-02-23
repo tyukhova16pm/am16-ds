@@ -91,12 +91,12 @@ void calculate(string in) {
     int len = in.length();
     Stack<float> st(len);
     float result = 0;
+    float digit1 = 0;
+    float digit2 = 0;
     for (int i = 0; i < len; ++i) {
         if(in[i]==' ') continue;
         switch(in[i]) {
             case '+': {
-    float digit1 = 0;
-    float digit2 = 0;
                 digit1 = st.peek();
                 st.pop();
                 digit2 = st.peek();
@@ -105,8 +105,6 @@ void calculate(string in) {
                 st.push(result);
             } break;
             case '-': {
-    float digit1 = 0;
-    float digit2 = 0;
                 digit1 = st.peek();
                 st.pop();
                 digit2 = st.peek();
@@ -115,8 +113,6 @@ void calculate(string in) {
                 st.push(result);
             } break;
             case '*': {
-    float digit1 = 0;
-    float digit2 = 0;
                 digit1 = st.peek();
                 st.pop();
                 digit2 = st.peek();
@@ -125,8 +121,6 @@ void calculate(string in) {
                 st.push(result);
             } break;
             case '/':{
-    float digit1 = 0;
-    float digit2 = 0;
                 digit1 = st.peek();
                 st.pop();
                 digit2 = st.peek();
