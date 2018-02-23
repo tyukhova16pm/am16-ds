@@ -181,7 +181,8 @@ void calc(string in)
             float num = 0;
             float gr = 10;
             int StopFlag = 0;
-            for(int j=0; ;j++)
+            int j;
+            for(j=0; ;j++)
             {
                 if(in[i+j] == '.') 
                 {
