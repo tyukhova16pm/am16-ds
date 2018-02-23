@@ -1,25 +1,20 @@
-#pragma once
-
-#include "finish.cpp"
-
+#include "lib.h"
+#include <iostream>
 using namespace std;
 
-int main () {
+int main() {
 
-  char *in;
+  char in[64];
   Stack q;
   int result;
   cout<<"VVedite virazhenie, razresheno ispolzovat:\n";
   cout<<"+, -, *, /, ^, (, )\n";
-
-  in = new char[64];
   cin>>in;
 
-  InfixToPostfix(in, q);
+  q = InfixToPostfix(in);
 
   result = Calculation(q);
 
-  cout<<result;
-
+  cout<< "ANSWER:   "<<result;
   return 0;
 }

@@ -1,5 +1,3 @@
-#pragma once
-
 using namespace std;
 
 
@@ -28,14 +26,15 @@ class Stack {
   Lexema *c;
 public:
   Stack();
+  Stack(const Stack &s);
   ~Stack();
+  int showSize();
   void get(Lexema ch);
   Lexema push();
   int isEmpty();
 };
 
-void InfixToPostfix (char *s, Stack &quene);
-
 int Operation (int &result, Lexema l, Stack &s);
-
 int Calculation(Stack &s);
+
+Stack InfixToPostfix(char *s);

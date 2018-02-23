@@ -1,14 +1,7 @@
-CC=g++
-CFLAGS=-c -Wall
-LDFLAGS=
-SOURCES=main.cpp lib.cpp finish.cpp
-OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=go
+all: go
 
-all: $(SOURCES) $(EXECUTABLE)
+go: lib.cpp finish.cpp main.cpp
+	g++ lib.cpp finish.cpp main.cpp -o go -g
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
-
-.cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
+clean:
+	rm -rf *.o go
