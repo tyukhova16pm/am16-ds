@@ -120,9 +120,6 @@ void calc(string in)
     int n = in.length();
     stek<float> st(n);
     float res = 0;
-    float num = 0;
-    float gr = 10;
-    int StopFlag = 0;
     float num1 = 0;
     float num2 = 0;
     for (int i = 0; i < n; ++i)
@@ -179,10 +176,12 @@ void calc(string in)
                 break;
             }
         }
-        else if(IsNumber(in[i]))
+        else
         {
-            int j;
-            for(j=0; ;j++)
+            float num = 0;
+            float gr = 10;
+            int StopFlag = 0;
+            for(int j=0; ;j++)
             {
                 if(in[i+j] == '.') 
                 {
@@ -199,7 +198,7 @@ void calc(string in)
                     else
                     {
                         num += (in[i+j]-'0')/gr;
-                        num *= 10;
+                        gr *= 10;
                     }
                 }
                 else break;
@@ -208,7 +207,6 @@ void calc(string in)
              st.push(num);
         }
     }
-
     cout << res << endl;
 }
 
