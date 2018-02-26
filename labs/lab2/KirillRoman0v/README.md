@@ -1,1 +1,2 @@
-LAB #2 by Kirill Roman0v
+### lab2/KirillRoman0v
+
