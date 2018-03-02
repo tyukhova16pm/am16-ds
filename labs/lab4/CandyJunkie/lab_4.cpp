@@ -13,13 +13,13 @@ Node *uncode_by_huffman_tree (Node * Huffman_tree, std::string sequence);
 int main ()
 {
 	#ifdef _WIN32
-	system ("chcp 1251"); // для отладки в винде.
+	system ("chcp 1251"); // РґР»СЏ РѕС‚Р»Р°РґРєРё РІ РІРёРЅРґРµ.
 	#endif
 
 	std::string input_name;
 	std::string output_name;
 	int mode = -1;
-	std::cout << "Введите, пожалуйста, названия двух файлов и режим работы. Первый файл будет перекодирован во второй. Режимы работы: 0 - упаковка, 1 - распаковка." << std::endl;
+	std::cout << "Р’РІРµРґРёС‚Рµ, РїРѕР¶Р°Р»СѓР№СЃС‚Р°, РЅР°Р·РІР°РЅРёСЏ РґРІСѓС… С„Р°Р№Р»РѕРІ Рё СЂРµР¶РёРј СЂР°Р±РѕС‚С‹. РџРµСЂРІС‹Р№ С„Р°Р№Р» Р±СѓРґРµС‚ РїРµСЂРµРєРѕРґРёСЂРѕРІР°РЅ РІРѕ РІС‚РѕСЂРѕР№. Р РµР¶РёРјС‹ СЂР°Р±РѕС‚С‹: 0 - СѓРїР°РєРѕРІРєР°, 1 - СЂР°СЃРїР°РєРѕРІРєР°." << std::endl;
 
 	getline (std::cin, input_name, ' ');
 	//std::cout << input_name.data () << " ";
@@ -45,7 +45,7 @@ int main ()
 			std::string codes[128];
 			fill_codes_from_Huffman_tree (Huffman_tree, codes);
 
-			//in.seekg (0, in.beg); // Почему это не работает????
+			//in.seekg (0, in.beg); // РџРѕС‡РµРјСѓ СЌС‚Рѕ РЅРµ СЂР°Р±РѕС‚Р°РµС‚????
 			in.close ();
 			in.open (input_name.data (), std::ifstream::binary);
 			std::ofstream out (output_name.data (), std::ofstream::binary);
@@ -59,9 +59,9 @@ int main ()
 			}
 			std::string remaining;
 			while (in.get (c)) {
-				print_bitwise (remaining, codes[(unsigned char)c], out); //читаем и пихаем
+				print_bitwise (remaining, codes[(unsigned char)c], out); //С‡РёС‚Р°РµРј Рё РїРёС…Р°РµРј
 			}
-			std::string zeros = "0000000"; // 7 штук, чтобы напечатать весь остаток наверняка
+			std::string zeros = "0000000"; // 7 С€С‚СѓРє, С‡С‚РѕР±С‹ РЅР°РїРµС‡Р°С‚Р°С‚СЊ РІРµСЃСЊ РѕСЃС‚Р°С‚РѕРє РЅР°РІРµСЂРЅСЏРєР°
 			print_bitwise (remaining, zeros, out);
 			out.close ();
 		} 
@@ -72,7 +72,7 @@ int main ()
 			for (int i = 0; i < 4; ++i) {
 				in.get (c);
 				if (c != HF16[i]) {
-					std::cerr << "Это твой файл, - говорили они. Распакуй, - просили они. Я такое не распаковываю!\n";
+					std::cerr << "Р­С‚Рѕ С‚РІРѕР№ С„Р°Р№Р», - РіРѕРІРѕСЂРёР»Рё РѕРЅРё. Р Р°СЃРїР°РєСѓР№, - РїСЂРѕСЃРёР»Рё РѕРЅРё. РЇ С‚Р°РєРѕРµ РЅРµ СЂР°СЃРїР°РєРѕРІС‹РІР°СЋ!\n";
 				}
 			}
 
@@ -98,11 +98,11 @@ int main ()
 		}
 		break;
 		default: {
-			std::cerr << "Ошибка! Mode не 1 и не 2.\n";
+			std::cerr << "РћС€РёР±РєР°! Mode РЅРµ 1 Рё РЅРµ 2.\n";
 		}
 	}
 
-	//getline (std::cin, output_name, ' '); для отладки
+	//getline (std::cin, output_name, ' '); РґР»СЏ РѕС‚Р»Р°РґРєРё
 
 	in.close ();
 
@@ -110,7 +110,7 @@ int main ()
 	return 0;
 }
 
-int index_of_min (Node ** arr) // заранее знаем, что
+int index_of_min (Node ** arr) // Р·Р°СЂР°РЅРµРµ Р·РЅР°РµРј, С‡С‚Рѕ
 {
 	int result = 0;
 	int min = -1;
@@ -173,7 +173,7 @@ void print_bitwise (std::string & remaining, std::string code, std::ofstream &ou
 		return;
 	}
 
-	int bytes = remaining.size () / 8; // сколько бутесов выводим
+	int bytes = remaining.size () / 8; // СЃРєРѕР»СЊРєРѕ Р±СѓС‚РµСЃРѕРІ РІС‹РІРѕРґРёРј
 	unsigned char output_byte = 0;
 	for (int i = 0; i < bytes; ++i) {	
 		for (unsigned int j = 0; j < 8; ++j) {
@@ -207,14 +207,14 @@ void read_bitwise_and_print_outside (Node * Huffman_tree, std::ifstream &input, 
 		remaining += new_byte;
 		new_byte.clear ();
 		Node * uncoding;
-		while (uncoding = uncode_by_huffman_tree (Huffman_tree, remaining)) { // выводим, пока в остатке хватает на раскодирование буквы.
+		while (uncoding = uncode_by_huffman_tree (Huffman_tree, remaining)) { // РІС‹РІРѕРґРёРј, РїРѕРєР° РІ РѕСЃС‚Р°С‚РєРµ С…РІР°С‚Р°РµС‚ РЅР° СЂР°СЃРєРѕРґРёСЂРѕРІР°РЅРёРµ Р±СѓРєРІС‹.
 			char letter = uncoding->get_letter ();
 			output.put (letter);
 			++size;
 			if (size == file_size) {
 				break;
 			}
-			remaining.erase (0, codes[(unsigned char)letter].size ()); // не хочется передавать путь в uncoding_..., поэтому делаем через codes
+			remaining.erase (0, codes[(unsigned char)letter].size ()); // РЅРµ С…РѕС‡РµС‚СЃСЏ РїРµСЂРµРґР°РІР°С‚СЊ РїСѓС‚СЊ РІ uncoding_..., РїРѕСЌС‚РѕРјСѓ РґРµР»Р°РµРј С‡РµСЂРµР· codes
 		}
 	}
 
