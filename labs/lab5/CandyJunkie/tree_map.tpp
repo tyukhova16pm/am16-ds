@@ -30,7 +30,7 @@ std::string tree_map::search (std::string key)
 		return root->search (key, 1);
 	}
 	else {
-		std::cout << "Ïóñòî.\n";
+		std::cout << "ĞŸÑƒÑÑ‚Ğ¾.\n";
 		return "";
 	}
 }
@@ -41,7 +41,7 @@ std::string tree_map::search_by_part_of_the_key (std::string part_of_the_key)
 		return root->search (part_of_the_key);
 	}
 	else {
-		std::cout << "Ïóñòî.\n";
+		std::cout << "ĞŸÑƒÑÑ‚Ğ¾.\n";
 		return "";
 	}
 }
