@@ -20,7 +20,7 @@ void hash_map::insert (int key, std::string value)
 std::string hash_map::search (int key)
 {
 	if (!m_size) {
-		std::cout << "Ïóñòî.\n";
+		std::cout << "ĞŸÑƒÑÑ‚Ğ¾.\n";
 		return "";
 	}
 	return hashes->search (key);
