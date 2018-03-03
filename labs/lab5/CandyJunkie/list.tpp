@@ -42,6 +42,6 @@ std::string list::search (int key)
 		}
 	}
 
-	std::cout << "Íè÷åãî íå íàøëè\n";
+	std::cout << "ĞĞ¸Ñ‡ĞµĞ³Ğ¾ Ğ½Ğµ Ğ½Ğ°ÑˆĞ»Ğ¸\n";
 	return "";
 }
