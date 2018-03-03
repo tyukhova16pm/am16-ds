@@ -9,7 +9,7 @@ void test_tree_map (tree_map & tmap);
 int main ()
 {
 	#ifdef _WIN32
-	system ("chcp 1251"); // для отладки в винде.
+	system ("chcp 1251"); // РґР»СЏ РѕС‚Р»Р°РґРєРё РІ РІРёРЅРґРµ.
 	#endif
 
 	std::ifstream in ("input.txt", std::ifstream::binary);
@@ -23,7 +23,7 @@ int main ()
 	tree_map tmap;
 
 	while (in.get(c)) {
-		while (('0' <= c) && (c <= '9')) { // читаем номер
+		while (('0' <= c) && (c <= '9')) { // С‡РёС‚Р°РµРј РЅРѕРјРµСЂ
 			number = number * 10 + c - '0';
 			str_number.push_back (c);
 			if (!in.get(c)) {
@@ -33,7 +33,7 @@ int main ()
 		while ((' ' == c) && in.get (c)) {
 			;
 		}
-		while (c != ' ') { // читаем фамилию
+		while (c != ' ') { // С‡РёС‚Р°РµРј С„Р°РјРёР»РёСЋ
 			surname.push_back (c);
 			if (!in.get (c)) {
 				break;
@@ -42,7 +42,7 @@ int main ()
 		while ((' ' == c) && in.get (c)) {
 			;
 		}
-		while (c != '\n') { // читаем имя
+		while (c != '\n') { // С‡РёС‚Р°РµРј РёРјСЏ
 			name.push_back (c);
 			if (!in.get (c)) {
 				break;
@@ -50,7 +50,7 @@ int main ()
 		}
 		if (number && surname.size () && name.size ()) {
 			hmap.insert (number, str_number + " " + surname + " " + name);
-			tmap.insert (surname, str_number + " " + surname + " " + name); // будем считать, что фамилии у всех разные.
+			tmap.insert (surname, str_number + " " + surname + " " + name); // Р±СѓРґРµРј СЃС‡РёС‚Р°С‚СЊ, С‡С‚Рѕ С„Р°РјРёР»РёРё Сѓ РІСЃРµС… СЂР°Р·РЅС‹Рµ.
 		}
 		number = 0;
 		str_number.clear ();
@@ -80,6 +80,6 @@ void test_hash_map (hash_map & hmap)
 void test_tree_map (tree_map & tmap)
 {
 	std::cout << "tree_map_test \n";
-	std::cout << tmap.search_by_part_of_the_key ("Ива").data ();
+	std::cout << tmap.search_by_part_of_the_key ("РРІР°").data ();
 	std::cout << std::endl;
 }
