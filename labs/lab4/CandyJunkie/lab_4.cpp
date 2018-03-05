@@ -31,18 +31,18 @@ int main ()
 	std::ifstream in (input_name.data (), std::ifstream::binary);
 	switch (mode) {
 		case 0: {
-			int statistics[128] = {};
+			int statistics[256] = {};
 			char c;
 			while (in.get (c)) {
 				++statistics[(unsigned char)c];
 			}
-			Node * forest[128];
-			for (int i = 0; i < 128; ++i) {
+			Node * forest[256];
+			for (int i = 0; i < 256; ++i) {
 				forest[i] = new Node (statistics[i], (char)i);
 			}
 
 			Node * Huffman_tree = merge_all_trees (forest);
-			std::string codes[128];
+			std::string codes[256];
 			fill_codes_from_Huffman_tree (Huffman_tree, codes);
 
 			//in.seekg (0, in.beg); // Почему это не работает????
@@ -50,7 +50,7 @@ int main ()
 			in.open (input_name.data (), std::ifstream::binary);
 			std::ofstream out (output_name.data (), std::ofstream::binary);
 			out << "HF16";
-			for (int i = 0; i < 128; ++i) {
+			for (int i = 0; i < 256; ++i) {
 				unsigned int stat = (unsigned int)statistics[i];
 				out.put ((char)(unsigned char)(stat & 0xFF000000) >> 24);
 				out.put ((char)(unsigned char)(stat & 0x00FF0000) >> 16);
@@ -76,8 +76,8 @@ int main ()
 				}
 			}
 
-			Node * forest[128];
-			for (int i = 0; i < 128; ++i) {
+			Node * forest[256];
+			for (int i = 0; i < 256; ++i) {
 				unsigned int stat = 0;
 				for (int j = 0; j < 4; ++j) {
 					in.get (c);
@@ -89,7 +89,7 @@ int main ()
 			}
 
 			Node * Huffman_tree = merge_all_trees (forest);
-			std::string codes[128];
+			std::string codes[256];
 			fill_codes_from_Huffman_tree (Huffman_tree, codes);
 
 			std::ofstream out (output_name.data (), std::ofstream::binary);
@@ -114,7 +114,7 @@ int index_of_min (Node ** arr) // заранее знаем, что
 {
 	int result = 0;
 	int min = -1;
-	for (int i = 0; i < 128; ++i) {
+	for (int i = 0; i < 256; ++i) {
 		if (arr[i] && ((arr[i]->get_weight () < min) || (min == -1))) {
 			result = i;
 			min = arr[i]->get_weight ();
@@ -126,22 +126,22 @@ int index_of_min (Node ** arr) // заранее знаем, что
 Node * merge_all_trees (Node **forest) {
 	int min = 0;
 
-	for (int trees = 128; trees > 1; --trees) {
+	for (int trees = 256; trees > 1; --trees) {
 		min = index_of_min (forest);
 		Node * left_subtree = forest[min];
-		for (int i = min; i < 127; ++i) {
+		for (int i = min; i < 255; ++i) {
 			forest[i] = forest[i + 1];
 		}
-		forest[127] = NULL;
+		forest[255] = NULL;
 		min = index_of_min (forest);
 		Node *right_subtree = forest[min];
-		for (int i = min; i < 127; ++i) {
+		for (int i = min; i < 255; ++i) {
 			forest[i] = forest[i + 1];
 		}
-		forest[127] = left_subtree->merge_as_left_subtree_with (right_subtree);	
+		forest[255] = left_subtree->merge_as_left_subtree_with (right_subtree);	
 	}
-	std::cout << "file_size = " << forest[127]->get_weight () << std::endl;
-	return forest[127];
+	std::cout << "file_size = " << forest[255]->get_weight () << std::endl;
+	return forest[255];
 }
 
 void fill_codes_from_Huffman_tree (Node * node_of_Huffman_tree, std::string *codes, std::string current_code)
