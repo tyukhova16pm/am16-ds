@@ -183,6 +183,7 @@ int compress(Count *cnt, FILE *input, FILE *output)
 	if(!init_tree(&tree, symbolMas))
 		return ERROR;
 
+	fputs("HF16", output);
 	while((c = fgetc(input)) != EOF)
 	{
 		if(symbolMas[c] == NULL)
@@ -221,6 +222,10 @@ int compress(Count *cnt, FILE *input, FILE *output)
 
 int decompress(Count *cnt, FILE *input, FILE *output)
 {
+	char hf16[5];
+	fgets(hf16, 5, input);
+	if(strncmp(hf16, "HF16", 4) != 0) return UNKNOWN_FORMAT;
+
 	cnt->countOfEncode = 0;
 	cnt->countOfUncode = 0;
 	int c;

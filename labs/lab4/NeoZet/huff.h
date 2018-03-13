@@ -6,6 +6,7 @@
 
 #define CORRECT 0
 #define ERROR -1
+#define UNKNOWN_FORMAT 1
 #define COUNT_OF_SYMBOLS 257
 #define ESC (COUNT_OF_SYMBOLS-1)
 #define NOT_SYMBOL COUNT_OF_SYMBOLS

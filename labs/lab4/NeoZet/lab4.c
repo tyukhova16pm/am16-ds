@@ -30,13 +30,21 @@ int main(int argc, char **argv)
 	{
 		case 'c':
 		{
-			compress(&cnt, fin, fout);
+			if(compress(&cnt, fin, fout) == ERROR)
+			{
+				printf("Compress error\n");
+				return ERROR;
+			}
 			break;
 		}
 
 		case 'd':
 		{
-			decompress(&cnt, fin, fout);
+			if(decompress(&cnt, fin, fout) == UNKNOWN_FORMAT)
+			{
+				printf("Unknown file format\n");
+				return UNKNOWN_FORMAT;
+			}
 			break;
 		}
 	}
