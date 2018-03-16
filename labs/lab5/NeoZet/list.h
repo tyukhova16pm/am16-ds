@@ -10,11 +10,3 @@ Node* initList(int key, char* value);
 void addNode(Node** head, int key, char* value);
 Node* findNode(Node* head, int key);
 void delNode(Node** head, int key);
-// typedef struct {
-// 	int size;
-// 	Node *head;
-// } List;
-
-// List* initList(int key, char* value);
-// void addNode(List *list, int key, char* value);
-// int delNode(List *list, int key);
