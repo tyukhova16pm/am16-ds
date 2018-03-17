@@ -6,7 +6,6 @@ HashTable* initHashTable(int size)
 {
 	HashTable* hash_table = (HashTable*)malloc(sizeof(HashTable));
 	hash_table->size = SIZE;
-	// hash_table->masOfList = (Node**)malloc(SIZE * sizeof(Node*));
 	
 	return hash_table;
 }
