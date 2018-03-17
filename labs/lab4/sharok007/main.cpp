@@ -11,6 +11,11 @@ using namespace std;
 void BuildTable(Node *root);//строим таблицу символ-код,для удобства записи в файл
 Node* Root(int *arr);//находим вершину дерева
 
+union big_end{
+    unsigned int bytes;
+    unsigned char byte[4];
+};
+
 vector <bool> code; //здесь будем хранить коды символов
 map<char, vector<bool> > table; //таблица символ-код
 
@@ -45,7 +50,6 @@ int main()
         }
         Node *p = Root(arr);
         BuildTable(p);
-        
         file.clear();
         file.seekg(0);
 
@@ -54,11 +58,12 @@ int main()
         ofstream out(name_output,ios::binary);
         out << "HF16";
         for (int i = 0; i < 256; ++i) {
-            unsigned int stat = (unsigned int)arr[i];
-            out.put ((char)(unsigned char)(stat & 0xFF000000) >> 24);
-            out.put ((char)(unsigned char)(stat & 0x00FF0000) >> 16);
-            out.put ((char)(unsigned char)(stat & 0x0000FF00) >> 8 );
-            out.put ((char)(unsigned char)(stat & 0x000000FF)      );
+            big_end bg;
+            bg.bytes = (unsigned int)arr[i];
+            out.put(bg.byte[3]);
+            out.put(bg.byte[2]);
+            out.put(bg.byte[1]);
+            out.put(bg.byte[0]);
         }
         int count = 0;
         char buf = 0;
@@ -68,8 +73,8 @@ int main()
             for(unsigned int i = 0; i < x.size(); ++i){
                 buf = buf | x[i]<<(7-count);
                 ++count;
-                if(count == 8){
-                    count =0;
+                if(8 == count){
+                    count = 0;
                     out << buf;
                     buf = 0;
                 }
@@ -95,6 +100,7 @@ int main()
             in.get (byte);
             if (byte != HF16[i]) {
                 cerr << "Неверный формат файла\n";
+                return 1;
             }
         }
         for (int i = 0; i < 256; ++i) {
@@ -118,7 +124,7 @@ int main()
             else {
                 p = p->getLeft();
             }
-            if(p->getLeft() == NULL && p->getRight()==NULL){
+            if(p->getLeft() == NULL && p->getRight() == NULL){
                 out << p->getSymbol();
                 p = root;
             }
@@ -144,7 +150,6 @@ Node* Root(int *arr){
     }
     while(statist.size() !=1){
         statist.sort(Compare());
-
         Node *SonLeft = statist.front();
         statist.pop_front();
         Node *SonRight = statist.front();
