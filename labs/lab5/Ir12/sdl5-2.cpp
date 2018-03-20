@@ -37,7 +37,7 @@ int main (int argc, char **argv)
 		for (unsigned int i = 0;i < strNumber.length();i++)
 		{
 			if (('0' > strNumber[i]) || ('9' < strNumber[i]))
-				throw runtime_error ("wrong input");
+				throw runtime_error ("неправильный ввод");
 			number = number *10 + strNumber[i] - '0';
 		}
 		getline (in, surname, ' ');
@@ -62,8 +62,7 @@ int main (int argc, char **argv)
 
 void testhashmap (hachmap<string> & hshMap)
 {
-	cout << "----- testing hashMap -----" << endl;
-	cout << "----- найдено по номеру -----" << endl;
+	cout << "найдено по номеру: " << endl;
 	int number = 458952;
 	for (int i = 0; i < 11; ++i) {
 		cout << hshMap.get(number + i).data () << endl;
@@ -73,11 +72,10 @@ void testhashmap (hachmap<string> & hshMap)
 
 void testtreemap (treemap<string> & trMap)
 {
-	cout << "----- testing treeMap -----" << endl;
-	cout << "----- найдено \"Ива\" -----" << endl;
-	trMap.print ("Vas");
+	cout << "найдено \"Ива\" " << endl;
+	trMap.print ("Ива");
 	cout << endl;
-	cout << "----- найдено \"Иванов\" -----" << endl;
+	cout << "найдено \"Иванов\" " << endl;
 	cout << trMap.get ("Иванов") << endl;
 	cout << endl;
 } 
