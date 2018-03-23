@@ -9,8 +9,8 @@ struct m_list {
     std::string data;
     struct m_list *next;
     struct m_list *prev;
-    
-    m_list(int key, std::string data, _list *_n, _list *_p);
+
+    m_list(int key, std::string data, m_list *_n, m_list *_p);
     m_list();
 };
 
