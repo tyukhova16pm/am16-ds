@@ -20,15 +20,15 @@ table::~table() {
 }
 
 void table::set(int key, std::string data) {
-    int buff = h(key);
+    int buff = del(key);
     nodes[buff].set(key, data);
 }
 
-int hash_table::del(int key) {
+int table::del(int key) {
     return key%size;
 }
 
-std::string hash_table::get(int key) {
+std::string table::get(int key) {
     int buff = del(key);
     return nodes[buff].get(key);
 }
