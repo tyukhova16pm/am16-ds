@@ -7,11 +7,11 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-    /*if (argc < 2) {
+    if (argc < 2) {
         cout << "Error" << endl;
         return 0;
-    }*/
-    string input = "/home/roller-alla/1.txt"; //argv[1];
+    }
+    string input = argv[1];
     ifstream in(input, ios_base::binary);
     int num = 0;
     hash_map h_map;
