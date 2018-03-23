@@ -1,33 +1,28 @@
-#ifndef TREE_H
-#define TREE_H
-
+#ifndef TREE
+#define TREE
 #include <iostream>
-#include <string>
 
-using namespace std;
-
-enum leaf_colour {
-  RED,
-  BLACK
-};
-
-class red_black_tree {
+class huffman_tree {
 private:
-    leaf_colour color;
-    tree *left;
-    tree *right;
-    tree *parent;
-    string value;
-    string key;    
-    bool is_left;
+    tree * left;
+    tree * right;
+    char symbol;
+    int weight;
 public:
-    tree(colour _color = BLACK, string _data = "", string _key = "", tree *_left = NULL, tree *child = NULL, tree *_parent = NULL, bool _is_left = false);
-    ~tree();
-    void update();
-    void set(string key, string _data);
-    bool is_empty();
-    string get(string key);
-    virtual void search_and_print(string key);
+    huffman_tree(tree *l = NULL, tree *r = NULL, char sym = 0, int w = 0);
+    ~huffman_tree();
+    bool is_leaf();
 };
 
-#endif
+union bytec {
+    unsigned int number;
+    unsigned char bytes[4];
+};
+#endif // TREE
+
+huffman_tree * make_node(tree * left_child, tree * right_child);
+int min_id(tree ** trees);
+tree * make_huffman_tree(tree **forest);
+void compress_way(tree * _tree, string *codes, string current_code);
+tree * decode(tree * big_tree, string str);
+void uncompress_way(tree *_tree, string input, string output, string * codes);
