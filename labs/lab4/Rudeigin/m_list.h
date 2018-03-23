@@ -13,3 +13,5 @@ struct m_list {
     m_list(int key, std::string data, _list *_n, _list *_p);
     m_list();
 };
+
+#endif
