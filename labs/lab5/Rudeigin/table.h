@@ -14,9 +14,10 @@ public:
     table(int _size);
     table();
     ~table();
-    int ost(int key);
+    int del(int key);
     void set(int key, std::string data);
     std::string get(int key);
 };
 
 #endif
+
