@@ -10,8 +10,8 @@ private:
     tree *root;
 public:
     tree_map();
-    ~tree_map()
-    void set(string key, Man man);
-    string get(string key);
-    virtual void search_and_print(string key);
+    ~tree_map();
+    void set(std::string key, Man man);
+    std::string get(std::string key);
+    virtual void search_and_print(std::string key);
 };
