@@ -4,7 +4,7 @@
 #include "list.h"
 
 list::list(){
-    head = new m_list(-1,"", NULL, NULL);
+    node = new m_list(-1,"", NULL, NULL);
 }
 
 list::list(int key, std::string data, m_list *n, m_list *p) {
@@ -17,7 +17,7 @@ list::~list() {
     }
 }
 
-void hash::set(int key, std::string data) {
+void list::set(int key, std::string data) {
     if (!node) {
         node = new m_list(key, data, NULL, NULL);
         return;
@@ -26,16 +26,16 @@ void hash::set(int key, std::string data) {
     while (buff->next) {
         buff = buff->next;
     }
-    buff->next = new m_list(key, data, NULL, num);
+    buff->next = new m_list(key, data, NULL, buff);
 }
 
-std::string hash::get(int key) {
+std::string list::get(int key) {
     if (!node)
         return "";
     if (node->key == key)
         return node->data;
     m_list *buff = node;
-    while (buff = buff->n)
+    while (buff = buff->next)
         if (buff->key == key)
             return buff->data;
     return "";
