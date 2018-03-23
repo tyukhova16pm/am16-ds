@@ -1,4 +1,10 @@
+#ifndef MAP_OF_TABLE_H
+#define MAP_OF_TABLE_H
 
+#include <iostream>
+#include <string>
+#include "table.h"
+#include "man.h"
 
 class map_of_table {
 private:
@@ -11,3 +17,5 @@ public:
     void set(int key, Man man);
     std::string get(int key);
 };
+
+#endif
