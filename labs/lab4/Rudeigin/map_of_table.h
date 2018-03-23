@@ -8,7 +8,7 @@
 
 class map_of_table {
 private:
-    table *table;
+    table * _table;
     int size;
 public:
     map_of_table();
