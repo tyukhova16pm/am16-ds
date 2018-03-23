@@ -7,7 +7,7 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-    if (argc < 2) {
+   if (argc < 2) {
         cout << "Укажите файл: ./prog_name filename.txt" << endl;
         return 0;
     }
@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
         man.name = "";
         num = 0;
         getline (in, man.telephone, ' ');
-        for (unsigned int i = 0; i < man.number.length(); ++i) {
+        for (unsigned int i = 0; i < man.telephone.length(); ++i) {
             num = num *10 + man.telephone[i] - '0';
         }
         getline (in, man.surname, ' ');
@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
         mtree.set(man.surname, man);
     }
     int key;
-    cout << "[1] По номерам \n [2] По начальным буквам/имени \n Выход - любая другая кнопка" << endl;
+    cout << "[1] По номерам \n[2]По начальным буквам/имени \n Выход - любая другая кнопка" << endl;
     cin >> key;
     switch(key) {
         case 1: {
@@ -41,10 +41,10 @@ int main(int argc, char **argv) {
             cout << "Введите от какого и до какого номера вывести данные:" << endl;
             cout << "От ";
             cin >> low;
-            cout << " до ";
+            cout << "до ";
             cin >> high;
-            for (int i = 0; i < (top-bottom); ++i) {
-                cout << mhash.get(bottom + i).data() << endl;
+            for (int i = 0; i < (high-low); ++i) {
+                cout << mhash.get(low + i).data() << endl;
             }
             break;
         }
@@ -65,4 +65,3 @@ int main(int argc, char **argv) {
     }
     return 0;
 }
-
