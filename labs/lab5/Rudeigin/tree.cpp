@@ -1,6 +1,7 @@
 #include "tree.h"
+#include <string>
 
-tree::tree(leaf_colour _color, string _data, string _key, tree * _left, tree * _right, tree * _parent, bool is_left)
+tree::tree(leaf_colour _color, std::string _data, std::string _key, tree * _left, tree * _right, tree * _parent, bool _is_left)
 {
     color = _color;
     if (_parent == NULL)
@@ -24,7 +25,7 @@ tree::tree(leaf_colour _color, string _data, string _key, tree * _left, tree * _
     }
     parent = _parent;
     key = _key;
-    data = _data;
+    value = _data;
     is_left = _is_left;
 }
 
@@ -35,16 +36,16 @@ tree::~tree() {
         delete right;
 }
 
-void tree::set(string _key, string _data)
+void tree::set(std::string _key, std::string _data)
 {
     int buff = _key.compare(key);
     if (buff < 0) {
         if (left->is_empty()) {
             left->color = RED;
             left->key = _key;
-            left->data = _data;
+            left->value = _data;
             left->left  = new tree(BLACK, "", "", NULL, NULL, left, true);
-            left->right_child = new tree(BLACK, "", "", NULL, NULL, left, false);
+            left->right = new tree(BLACK, "", "", NULL, NULL, left, false);
             left->update();
         }
         else {
@@ -55,7 +56,7 @@ void tree::set(string _key, string _data)
         if (right->is_empty()) {
             right->color = RED;
             right->key = _key;
-            right->data = _data;
+            right->value = _data;
             right->left = new tree(BLACK, "", "", NULL, NULL, right, true);
             right->right = new tree(BLACK, "", "", NULL, NULL, right, false);
             right->update();
@@ -66,7 +67,7 @@ void tree::set(string _key, string _data)
     }
 }
 
-string tree::get(string _key)
+std::string tree::get(std::string _key)
 {
     int buff = _key.compare(key);
     if (buff < 0) {
@@ -77,7 +78,7 @@ string tree::get(string _key)
         if (right->is_empty()) return "";
         else return right->get(_key);
     }
-    else return data;
+    else return value;
 }
 
 void tree::update() {
@@ -88,13 +89,13 @@ void tree::update() {
         granny->right->color = BLACK;
         if (granny->parent) granny->color = RED;
         else return;
-        granny->updte();
+        granny->update();
     }
     else {
         if (parent->is_left) {
             if (is_left) {
                 granny->left = parent->right;
-                granny->left->parent = grand_father;
+                granny->left->parent = granny;
                 granny->left->is_left = true;
 
                 if (granny->parent)
@@ -131,7 +132,7 @@ void tree::update() {
             if (!is_left) {
                 granny->right = parent->left;
                 granny->right->parent = granny;
-                granny->right->i_left = false;
+                granny->right->is_left = false;
                 if (granny->parent) {
                     if (!granny->is_left)
                         granny->parent->right = parent;
@@ -168,7 +169,7 @@ bool tree::is_empty() {
     else return true;
 }
 
-void tree::search_and_print(string k)
+void tree::search_and_print(std::string k)
 {
     int buff = k.compare(key);
     if (buff > 0) {
@@ -179,17 +180,17 @@ void tree::search_and_print(string k)
         int buff = key.find(k);
         if (buff == 0) {
             if (!left->is_empty()) {
-                left->search(k);
+                left->search_and_print(k);
             }
-            cout << data.data() << endl;
+            std::cout << value.data() << std::endl;
             if (!right->is_empty()) {
-                right->search(k);
+                right->search_and_print(k);
             }
             return;
         }
         else {
             if (left->is_empty()) return;
-            else                 return left->search(k);
+            else                  return left->search_and_print(k);
         }
     }
 }
