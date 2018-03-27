@@ -64,7 +64,8 @@ int main()
     }
     test_hash(map_hash);
     test_tree(tree_map);
-
+    
+    in.close();
     return 0;
 }
 
