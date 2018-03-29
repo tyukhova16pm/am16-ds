@@ -6,7 +6,7 @@ int sokoban_field::box_amount = 0;
 
 sokoban_field::sokoban_field (std::ifstream & in)
 {
-	box = new int * [3]; // Максимум коробок 3. 4 пихал - не влезает.
+	box = new int * [3]; // РњР°РєСЃРёРјСѓРј РєРѕСЂРѕР±РѕРє 3. 4 РїРёС…Р°Р» - РЅРµ РІР»РµР·Р°РµС‚.
 	for (int i = 0; i < 3; ++i) {
 		box[i] = new int [2];
 		box[i][0] = 0;
@@ -22,7 +22,7 @@ sokoban_field::sokoban_field (std::ifstream & in)
 						for (int b2_y = 0; b2_y < width; ++b2_y) {
 							for (int b3_x = 0; b3_x < height; ++b3_x) {
 								for (int b3_y = 0; b3_y < width; ++b3_y) {
-									older_steps[p_x][p_y][b1_x][b1_y][b2_x][b2_y][b3_x][b3_y] = false; // без комментариев.
+									older_steps[p_x][p_y][b1_x][b1_y][b2_x][b2_y][b3_x][b3_y] = false; // Р±РµР· РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ.
 								}
 							}
 						}
@@ -44,7 +44,7 @@ sokoban_field::sokoban_field (std::ifstream & in)
 	char c;
 	while (in.get(c)) {
 		if (c == '\n') {
-			break; // считываем конец строки.
+			break; // СЃС‡РёС‚С‹РІР°РµРј РєРѕРЅРµС† СЃС‚СЂРѕРєРё.
 		}
 	}
 
@@ -101,7 +101,7 @@ sokoban_field::sokoban_field (std::ifstream & in)
 		box[i][0] = 0;
 		box[i][1] = 0;
 	}
-	older_steps[player_x][player_y][box[0][0]][box[0][1]][box[1][0]][box[1][1]][box[2][0]][box[2][1]] = true; // Делаем вид, что это одномерный массив.
+	older_steps[player_x][player_y][box[0][0]][box[0][1]][box[1][0]][box[1][1]][box[2][0]][box[2][1]] = true; // Р”РµР»Р°РµРј РІРёРґ, С‡С‚Рѕ СЌС‚Рѕ РѕРґРЅРѕРјРµСЂРЅС‹Р№ РјР°СЃСЃРёРІ.
 }
 
 sokoban_field::~sokoban_field ()
