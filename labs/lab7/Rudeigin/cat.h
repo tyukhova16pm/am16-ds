@@ -6,8 +6,6 @@
 
 enum properties {ID, AGE, NAME, BREED, FOOD};
 
-enum comparing {LESS, EQUAL, MORE};
-
 class cat {
 private:
     int id;
@@ -21,7 +19,11 @@ public:
     std::string get_name();
     std::string get_breed();
     std::string get_food();
-    //friend std::ostream& operator << (std::ostream& out, cat& ex);
+    void set_id(int _id);
+    void set_age(int _age);
+    void set_name(std::string _name);
+    void set_breed(std::string _breed);
+    void set_food(std::string _food);
 };
 
 #endif // CAT_H
