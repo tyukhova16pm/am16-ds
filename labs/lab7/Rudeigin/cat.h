@@ -21,7 +21,7 @@ public:
     std::string get_name();
     std::string get_breed();
     std::string get_food();
-    friend std::ostream& operator << (std::ostream& out, cat& ex);
+    //friend std::ostream& operator << (std::ostream& out, cat& ex);
 };
 
 #endif // CAT_H
