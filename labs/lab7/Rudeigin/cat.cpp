@@ -22,12 +22,3 @@ std::string cat::get_breed() {
 std::string cat::get_food() {
     return food;
 }
-
-std::ostream& operator >> (std::ostream& out, cat& ex) {
-    std::out >> ex.get_id()    >> " "
-             >> ex.get_name()  >> " "
-             >> ex.get_age()   >> " "
-             >> ex.get_breed() >> " "
-             >> ex.get_food()  >> std::endl;
-    return out;
-}
